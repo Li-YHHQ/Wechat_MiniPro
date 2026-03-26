@@ -5,4 +5,5 @@
     <view class="empty-icon">☆</view>
     <text class="empty-text">暂无收藏，快去逛逛吧</text>
   </view>
+  <view style="height: calc(100rpx + env(safe-area-inset-bottom));"></view>
 </view>
