@@ -22,6 +22,12 @@ Page({
     this.setData({ displayList: this.data.allList })
   },
 
+  onShow() {
+    if (typeof this.getTabBar === 'function' && this.getTabBar()) {
+      this.getTabBar().setData({ selected: 1 })
+    }
+  },
+
   handleExpand() {
     this.setData({ displayList: this.data.allList, mode: 'all' })
   },

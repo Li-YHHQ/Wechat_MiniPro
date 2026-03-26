@@ -1,47 +1,37 @@
 <!-- pages/detail/detail.wxml -->
-<view class="container" wx:if="{{building}}">
+<view wx:if="{{item}}" class="detail-page">
 
-  <!-- 建筑名称 -->
-  <view class="title-block">
-    <text class="title">{{building.name}}</text>
-    <text class="subtitle">{{building.desc}}</text>
-  </view>
+  <text class="title">{{item.name}}</text>
 
   <!-- 历史背景 -->
-  <view class="section-card">
-    <view class="section-header">
-      <text class="section-label">历史背景</text>
-    </view>
-    <view class="section-body">
-      <image class="section-img" src="{{building.history.img}}" mode="aspectFill" />
-      <text class="section-desc">{{building.history.desc}}</text>
+  <view class="stage-card">
+    <text class="stage-title">历史背景</text>
+    <view class="stage-content">
+      <image src="{{item.history.img}}" mode="aspectFill" class="stage-img" />
+      <text class="stage-desc">{{item.history.desc}}</text>
     </view>
   </view>
 
   <!-- 建筑特色 -->
-  <view class="section-card">
-    <view class="section-header">
-      <text class="section-label">建筑特色</text>
-    </view>
-    <view class="section-body">
-      <image class="section-img" src="{{building.feature.img}}" mode="aspectFill" />
-      <text class="section-desc">{{building.feature.desc}}</text>
+  <view class="stage-card">
+    <text class="stage-title">建筑特色</text>
+    <view class="stage-content">
+      <image src="{{item.feature.img}}" mode="aspectFill" class="stage-img" />
+      <text class="stage-desc">{{item.feature.desc}}</text>
     </view>
   </view>
 
   <!-- 现代价值 -->
-  <view class="section-card">
-    <view class="section-header">
-      <text class="section-label">现代价值</text>
-    </view>
-    <view class="section-body">
-      <image class="section-img" src="{{building.value.img}}" mode="aspectFill" />
-      <text class="section-desc">{{building.value.desc}}</text>
+  <view class="stage-card">
+    <text class="stage-title">现代价值</text>
+    <view class="stage-content">
+      <image src="{{item.value.img}}" mode="aspectFill" class="stage-img" />
+      <text class="stage-desc">{{item.value.desc}}</text>
     </view>
   </view>
 
 </view>
 
-<view class="empty" wx:else>
-  <text>暂无该建筑信息</text>
+<view wx:else class="empty">
+  <text>加载中...</text>
 </view>
