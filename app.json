@@ -1,0 +1,38 @@
+{
+  "tabBar": {
+    "list": [
+      {
+        "pagePath": "pages/first/first",
+        "text": "home",
+        "iconPath": "assets/icon/home.png",
+        "selectedIconPath": "assets/icon/home-selected.png"
+      },
+      {
+        "pagePath": "pages/clock/clock",
+        "text": "clock",
+        "iconPath": "assets/icon/clock.png",
+        "selectedIconPath": "assets/icon/clock-selected.png"
+      }
+  ]
+  },
+  "pages": [
+    "pages/first/first",
+    "pages/home/home",
+    
+    "pages/clock/clock",
+    "pages/fire/fire",
+    "pages/index/index",
+    "pages/logs/logs"
+  ],
+  "window": {
+    "navigationBarTextStyle": "black",
+    "navigationBarTitleText": "abc",
+    "navigationBarBackgroundColor": "#FCBF49",
+    "enablePullDownRefresh": true,
+    "backgroundColor": "#F77F00"
+  },
+  "style": "v2",
+  "componentFramework": "glass-easel",
+  "sitemapLocation": "sitemap.json",
+  "lazyCodeLoading": "requiredComponents"
+}

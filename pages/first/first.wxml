@@ -1,0 +1,95 @@
+<!--pages/first/first.wxml-->
+<text>pages/first/first.wxml</text>
+<view wx:for="{{userList}}" wx:for-item="abc" wx:key="id">
+  {{abc.name}}
+</view>
+<view wx:for="{{array}}" wx:for-index="idx" wx:for-item="itemName">
+  index: {{idx}}, oo: {{itemName}}
+</view>
+<view wx:for="{{array}}">
+  index: {{index}}, oo: {{item}}
+</view>
+<block wx:if="{{false}}">
+  <view>1</view>
+  <view>2</view>
+  <view>3</view>
+</block>
+
+<view wx:if="{{ type === 1 }}">male</view>
+<view wx:elif="{{ type === 2 }}">female</view>
+<view wx:else>secret</view>
+
+
+<view>{{msg}}</view>
+<view><input value="{{msg}}" bindinput="iptHandler"></input></view>
+<view>
+  <input bindinput="showInput"></input>
+</view>
+<view>
+  <button type="primary" bindtap="getParam" data-info="{{99}}">getparam</button>
+</view>
+<view>
+  <button bindtap="addOne">add: {{ count }}</button>
+</view>
+<view>
+  <button type="primary" bindtap="onButtonTap">click</button>
+</view>
+<view>{{ randomNum >=5 ? "随机数大于等于5" : "随机数小于5"}}</view>
+<view>
+  <image src="{{ imgSrc }}"></image>
+</view>
+<view>{{ info }}</view>
+<view>
+  <image src="/images/mac.webp"></image>
+</view>
+<view>
+  <image src="/images/highmac.png" mode="aspectFit"></image>
+</view>
+<view>
+  <image src="/images/highmac.png" mode="aspectFill"></image>
+</view>
+<view>
+  <image src="/images/highmac.png" mode="widthFix"></image>
+</view>
+<view>
+  <image src="/images/highmac.png" mode="heightFix"></image>
+</view>
+<view>
+  <button>hello</button>
+  <button type="primary">hello</button>
+  <button type="warn">hello</button>
+  <button type="warn" size="mini">hello</button>
+  <button type="primary" plain>hello</button>
+</view>
+<rich-text nodes="<h1 style='color:red;'>标题<h1>"></rich-text>
+<view>
+  <text selectable>1234567890-</text>
+</view>
+<swiper class="swiper-container" 
+        indicator-dots 
+        indicator-color="rgba(45, 255, 200, 1)"
+        indicator-active-color="rgba(255, 0, 0, 1)"
+        autoplay
+        interval="1000"
+        circular>
+  <swiper-item class="item">
+    <view>A</view>
+  </swiper-item>
+  <swiper-item class="item">
+    <view>B</view>
+  </swiper-item>
+  <swiper-item class="item">
+    <view>C</view>
+  </swiper-item>
+</swiper>
+<view class="container1">
+    <view>A</view>
+    <view>B</view>
+    <view>C</view>
+</view>
+
+<scroll-view class="container2" scroll-y>
+    <view>A</view>
+    <view>B</view>
+    <view>C</view>
+</scroll-view>
