@@ -1,12 +1,12 @@
 /* pages/detail/detail.wxss */
 .container {
-  background: #FDF6E3;
+  background: #F5F0E8;
   min-height: 100vh;
   padding-bottom: 60rpx;
 }
 
 .title-block {
-  background: #6B8E5A;
+  background: #6B3A2A;
   padding: 40rpx 30rpx 36rpx;
   display: flex;
   flex-direction: column;
@@ -32,12 +32,12 @@
   background: #fff;
   border-radius: 20rpx;
   margin: 24rpx 24rpx 0;
-  box-shadow: 0 4rpx 20rpx rgba(107,142,90,0.12);
+  box-shadow: 0 4rpx 20rpx rgba(139,69,19,0.08);
   overflow: hidden;
 }
 
 .section-header {
-  background: linear-gradient(90deg, #8B6914 0%, #B8860B 100%);
+  background: linear-gradient(90deg, #8B4513 0%, #C8A96E 100%);
   padding: 18rpx 30rpx;
 }
 
@@ -66,7 +66,7 @@
 .section-desc {
   flex: 1;
   font-size: 26rpx;
-  color: #555;
+  color: #3D2B1F;
   line-height: 1.8;
 }
 
@@ -76,5 +76,5 @@
   align-items: center;
   height: 60vh;
   font-size: 28rpx;
-  color: #999;
+  color: #8C7B6B;
 }

@@ -25,6 +25,7 @@
     "minifyWXSS": true,
     "minifyWXML": true,
     "localPlugins": false,
+    "urlCheck": false,
     "condition": false,
     "swc": false,
     "disableSWC": true,

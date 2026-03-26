@@ -1,15 +1,13 @@
 <!-- pages/mine/mine.wxml -->
-<view class="container">
+<view class="mine-page">
 
-  <!-- 用户信息区 -->
-  <view class="user-card">
-    <view class="avatar-wrap">
-      <image class="avatar" src="https://via.placeholder.com/120x120/FDF6E3/8B6914?text=游" mode="aspectFill" />
-    </view>
-    <text class="nickname">游客用户</text>
+  <!-- 顶部用户信息 -->
+  <view class="user-header">
+    <image class="avatar" src="https://picsum.photos/120/120?random=99" mode="aspectFill" />
+    <text class="username">游客用户</text>
   </view>
 
-  <!-- 功能列表 -->
+  <!-- 功能菜单列表 -->
   <view class="menu-list">
     <view class="menu-item" bindtap="onMenuTap" data-item="我的足迹">
       <text class="menu-label">我的足迹</text>
@@ -25,13 +23,11 @@
     </view>
     <view class="menu-item last">
       <text class="menu-label">版本信息</text>
-      <text class="menu-version">{{version}}</text>
+      <text class="menu-version">v1.0.0</text>
     </view>
   </view>
 
-  <!-- 底部版权 -->
-  <view class="footer">
-    <text class="footer-text">© 2026 宫墙导览</text>
-  </view>
+  <!-- 版权 -->
+  <text class="copyright">© 2026 宫墙导览</text>
 
 </view>

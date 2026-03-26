@@ -11,8 +11,9 @@
     "pages/logs/logs"
   ],
   "tabBar": {
-    "selectedColor": "#8B6914",
-    "backgroundColor": "#FDF6E3",
+    "selectedColor": "#8B4513",
+    "color": "#8C7B6B",
+    "backgroundColor": "#F5F0E8",
     "borderStyle": "black",
     "list": [
       {
@@ -48,11 +49,14 @@
     ]
   },
   "window": {
-    "navigationBarBackgroundColor": "#6B8E5A",
+    "navigationBarBackgroundColor": "#6B3A2A",
     "navigationBarTitleText": "宫墙导览",
     "navigationBarTextStyle": "white",
     "enablePullDownRefresh": false,
-    "backgroundColor": "#FDF6E3"
+    "backgroundColor": "#F5F0E8"
+  },
+  "networkTimeout": {
+    "request": 10000
   },
   "style": "v2",
   "componentFramework": "glass-easel",
