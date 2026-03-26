@@ -1,0 +1,22 @@
+<view class="tab-bar">
+  <view class="tab-item {{selected === 0 ? 'active' : ''}}" bindtap="switchTab" data-index="0" data-path="/pages/palace/palace">
+    <text class="tab-icon">🏯</text>
+    <text class="tab-text">宫殿</text>
+  </view>
+  <view class="tab-item {{selected === 1 ? 'active' : ''}}" bindtap="switchTab" data-index="1" data-path="/pages/garden/garden">
+    <text class="tab-icon">🌿</text>
+    <text class="tab-text">花园</text>
+  </view>
+  <view class="tab-item {{selected === 2 ? 'active' : ''}}" bindtap="switchTab" data-index="2" data-path="/pages/tower/tower">
+    <text class="tab-icon">🗼</text>
+    <text class="tab-text">城楼</text>
+  </view>
+  <view class="tab-item {{selected === 3 ? 'active' : ''}}" bindtap="switchTab" data-index="3" data-path="/pages/favorite/favorite">
+    <text class="tab-icon">❤️</text>
+    <text class="tab-text">收藏</text>
+  </view>
+  <view class="tab-item {{selected === 4 ? 'active' : ''}}" bindtap="switchTab" data-index="4" data-path="/pages/mine/mine">
+    <text class="tab-icon">👤</text>
+    <text class="tab-text">我的</text>
+  </view>
+</view>
