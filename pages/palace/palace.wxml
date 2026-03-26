@@ -1,33 +1,47 @@
 <!-- pages/palace/palace.wxml -->
 <view class="container">
 
-  <!-- 轮播图 -->
-  <swiper class="swiper" autoplay="{{true}}" interval="3000" circular="{{true}}" indicator-dots="{{true}}" indicator-color="rgba(255,255,255,0.5)" indicator-active-color="#C8A96E">
-    <swiper-item wx:for="{{swiperImages}}" wx:key="index">
-      <image class="swiper-img" src="{{item}}" mode="aspectFill" />
-    </swiper-item>
-  </swiper>
-
-  <!-- 操作按钮区 -->
-  <view class="btn-group">
-    <button class="btn {{mode === 'all' ? 'btn-active' : ''}}" bindtap="handleExpand">展开</button>
-    <button class="btn {{mode === 'half' ? 'btn-active' : ''}}" bindtap="handleHalf">展示一半</button>
-    <button class="btn {{mode === 'collapse' ? 'btn-active' : ''}}" bindtap="handleCollapse">收起</button>
+  <!-- 加载动画 -->
+  <view wx:if="{{loading}}" class="loading-wrap">
+    <view class="loading-spinner"></view>
+    <text class="loading-text">正在加载...</text>
   </view>
 
-  <!-- 统计文字 -->
-  <view class="stats-text">宫殿建筑，共 {{allList.length}} 个</view>
+  <!-- 页面内容（渐入） -->
+  <view wx:else class="page-content {{fadeIn ? 'fade-in' : ''}}">
 
-  <!-- 建筑列表 -->
-  <view class="list">
-    <view class="list-item" wx:for="{{displayList}}" wx:key="id" bindtap="goDetail" data-id="{{item.id}}">
-      <image class="item-img" src="{{item.img}}" mode="aspectFill" />
-      <view class="item-info">
-        <text class="item-name">{{item.name}}</text>
-        <text class="item-desc">{{item.desc}}</text>
-      </view>
-      <text class="item-arrow">›</text>
+    <!-- 轮播图 -->
+    <swiper class="swiper" autoplay="{{true}}" interval="3000" circular="{{true}}" indicator-dots="{{true}}" indicator-color="rgba(255,255,255,0.5)" indicator-active-color="#C8A96E">
+      <swiper-item wx:for="{{swiperImages}}" wx:key="index">
+        <image class="swiper-img" src="{{item}}" mode="aspectFill" />
+      </swiper-item>
+    </swiper>
+
+    <!-- 操作按钮区 -->
+    <view class="btn-group">
+      <button class="btn {{mode === 'all' ? 'btn-active' : ''}}" bindtap="handleExpand">展开</button>
+      <button class="btn {{mode === 'half' ? 'btn-active' : ''}}" bindtap="handleHalf">展示一半</button>
+      <button class="btn {{mode === 'collapse' ? 'btn-active' : ''}}" bindtap="handleCollapse">收起</button>
     </view>
+
+    <!-- 统计文字 + 列表（收起时整体隐藏） -->
+    <view wx:if="{{showList}}">
+      <view class="stats-text">宫殿建筑，共 {{allList.length}} 个</view>
+      <view class="list">
+        <view class="list-item" wx:for="{{displayList}}" wx:key="id" bindtap="goDetail" data-id="{{item.id}}">
+          <image class="item-img" src="{{item.img}}" mode="aspectFill" />
+          <view class="item-info">
+            <text class="item-name">{{item.name}}</text>
+            <text class="item-desc">{{item.desc}}</text>
+          </view>
+          <text class="item-arrow">›</text>
+        </view>
+      </view>
+    </view>
+
+    <!-- tabBar 底部占位 -->
+    <view style="height: calc(100rpx + env(safe-area-inset-bottom));"></view>
+
   </view>
 
 </view>

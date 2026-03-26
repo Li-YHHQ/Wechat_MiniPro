@@ -30,4 +30,7 @@
   <!-- 版权 -->
   <text class="copyright">© 2026 宫墙导览</text>
 
+  <!-- tabBar 底部占位 -->
+  <view style="height: calc(100rpx + env(safe-area-inset-bottom));"></view>
+
 </view>
