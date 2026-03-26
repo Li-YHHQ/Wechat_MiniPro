@@ -1,6 +1,6 @@
 /* pages/palace/palace.wxss */
 .container {
-  background: #FDF6E3;
+  background: #F5F0E8;
   min-height: 100vh;
 }
 
@@ -25,10 +25,10 @@
 
 .btn {
   flex: 1;
-  background: #8B6914;
+  background: #8B4513;
   color: #fff;
   font-size: 26rpx;
-  border-radius: 40rpx;
+  border-radius: 8rpx;
   padding: 14rpx 0;
   border: none;
   line-height: 1.4;
@@ -39,12 +39,12 @@
 }
 
 .btn-active {
-  background: #6B8E5A;
+  background: #6B3A2A;
 }
 
 .stats-text {
   font-size: 26rpx;
-  color: #6B8E5A;
+  color: #8B4513;
   padding: 0 30rpx 16rpx;
   font-weight: 500;
 }
@@ -57,12 +57,12 @@
   display: flex;
   flex-direction: row;
   align-items: center;
-  background: #fff;
+  background: #FFFFFF;
   border-radius: 16rpx;
   margin-bottom: 16rpx;
-  padding: 20rpx;
-  box-shadow: 0 2rpx 12rpx rgba(107,142,90,0.10);
-  border-bottom: 1rpx solid #F0E8D0;
+  padding: 20rpx 24rpx;
+  box-shadow: 0 2rpx 12rpx rgba(139,69,19,0.08);
+  border-bottom: 1rpx solid #E8DDD0;
 }
 
 .item-img {
@@ -74,7 +74,9 @@
 
 .item-info {
   flex: 1;
-  padding: 0 20rpx;
+  min-width: 0;
+  overflow: hidden;
+  margin-left: 20rpx;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -83,18 +85,25 @@
 .item-name {
   font-size: 30rpx;
   font-weight: 600;
-  color: #333;
+  color: #3D2B1F;
   margin-bottom: 10rpx;
 }
 
 .item-desc {
   font-size: 24rpx;
-  color: #888;
-  line-height: 1.5;
+  color: #8C7B6B;
+  line-height: 36rpx;
+  white-space: normal;
+  word-break: break-all;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 
 .item-arrow {
   font-size: 40rpx;
-  color: #8B6914;
+  color: #C8A96E;
   flex-shrink: 0;
+  margin-left: 8rpx;
 }

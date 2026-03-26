@@ -1,46 +1,42 @@
 /* pages/mine/mine.wxss */
-.container {
-  background: #FDF6E3;
+.mine-page {
   min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-}
-
-.user-card {
-  background: #6B8E5A;
+  background: #F5F0E8;
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 60rpx 30rpx 50rpx;
+  padding: 60rpx 32rpx 40rpx;
+  box-sizing: border-box;
 }
 
-.avatar-wrap {
-  width: 120rpx;
-  height: 120rpx;
-  border-radius: 60rpx;
-  overflow: hidden;
-  border: 4rpx solid rgba(255,255,255,0.6);
-  margin-bottom: 20rpx;
+.user-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 48rpx;
 }
 
 .avatar {
-  width: 120rpx;
-  height: 120rpx;
+  width: 160rpx;
+  height: 160rpx;
+  border-radius: 80rpx;
+  background: #E8DDD0;
+  margin-bottom: 20rpx;
 }
 
-.nickname {
-  font-size: 30rpx;
-  color: #fff;
-  font-weight: 600;
-  letter-spacing: 2rpx;
+.username {
+  font-size: 32rpx;
+  color: #3D2B1F;
+  font-weight: 500;
 }
 
 .menu-list {
-  background: #fff;
-  border-radius: 20rpx;
-  margin: 30rpx 24rpx 0;
+  width: 100%;
+  background: #FFFFFF;
+  border-radius: 16rpx;
   overflow: hidden;
-  box-shadow: 0 4rpx 16rpx rgba(107,142,90,0.10);
+  box-shadow: 0 2rpx 12rpx rgba(139,69,19,0.08);
+  margin-bottom: 60rpx;
 }
 
 .menu-item {
@@ -48,8 +44,8 @@
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  padding: 34rpx 30rpx;
-  border-bottom: 1rpx solid #F0E8D0;
+  padding: 36rpx 32rpx;
+  border-bottom: 1rpx solid #E8DDD0;
 }
 
 .menu-item.last {
@@ -57,29 +53,22 @@
 }
 
 .menu-label {
-  font-size: 28rpx;
-  color: #333;
+  font-size: 30rpx;
+  color: #3D2B1F;
 }
 
 .menu-arrow {
-  font-size: 40rpx;
-  color: #8B6914;
+  font-size: 36rpx;
+  color: #8C7B6B;
 }
 
 .menu-version {
-  font-size: 26rpx;
-  color: #999;
+  font-size: 28rpx;
+  color: #8C7B6B;
 }
 
-.footer {
-  margin-top: auto;
-  padding: 50rpx 0 40rpx;
-  display: flex;
-  justify-content: center;
-}
-
-.footer-text {
+.copyright {
   font-size: 24rpx;
-  color: #bbb;
-  letter-spacing: 1rpx;
+  color: #8C7B6B;
+  margin-top: auto;
 }
