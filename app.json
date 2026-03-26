@@ -1,35 +1,58 @@
 {
-  "tabBar": {
-    "list": [
-      {
-        "pagePath": "pages/first/first",
-        "text": "home",
-        "iconPath": "assets/icon/home.png",
-        "selectedIconPath": "assets/icon/home-selected.png"
-      },
-      {
-        "pagePath": "pages/clock/clock",
-        "text": "clock",
-        "iconPath": "assets/icon/clock.png",
-        "selectedIconPath": "assets/icon/clock-selected.png"
-      }
-  ]
-  },
   "pages": [
+    "pages/palace/palace",
+    "pages/garden/garden",
+    "pages/tower/tower",
+    "pages/favorite/favorite",
+    "pages/mine/mine",
+    "pages/detail/detail",
     "pages/first/first",
-    "pages/home/home",
-    
-    "pages/clock/clock",
-    "pages/fire/fire",
     "pages/index/index",
     "pages/logs/logs"
   ],
+  "tabBar": {
+    "selectedColor": "#8B6914",
+    "backgroundColor": "#FDF6E3",
+    "borderStyle": "black",
+    "list": [
+      {
+        "pagePath": "pages/palace/palace",
+        "text": "宫殿",
+        "iconPath": "assets/icon/blank.png",
+        "selectedIconPath": "assets/icon/blank.png"
+      },
+      {
+        "pagePath": "pages/garden/garden",
+        "text": "花园",
+        "iconPath": "assets/icon/blank.png",
+        "selectedIconPath": "assets/icon/blank.png"
+      },
+      {
+        "pagePath": "pages/tower/tower",
+        "text": "城楼",
+        "iconPath": "assets/icon/blank.png",
+        "selectedIconPath": "assets/icon/blank.png"
+      },
+      {
+        "pagePath": "pages/favorite/favorite",
+        "text": "收藏",
+        "iconPath": "assets/icon/blank.png",
+        "selectedIconPath": "assets/icon/blank.png"
+      },
+      {
+        "pagePath": "pages/mine/mine",
+        "text": "我的",
+        "iconPath": "assets/icon/blank.png",
+        "selectedIconPath": "assets/icon/blank.png"
+      }
+    ]
+  },
   "window": {
-    "navigationBarTextStyle": "black",
-    "navigationBarTitleText": "abc",
-    "navigationBarBackgroundColor": "#FCBF49",
-    "enablePullDownRefresh": true,
-    "backgroundColor": "#F77F00"
+    "navigationBarBackgroundColor": "#6B8E5A",
+    "navigationBarTitleText": "宫墙导览",
+    "navigationBarTextStyle": "white",
+    "enablePullDownRefresh": false,
+    "backgroundColor": "#FDF6E3"
   },
   "style": "v2",
   "componentFramework": "glass-easel",

@@ -1,0 +1,8 @@
+<!-- pages/favorite/favorite.wxml -->
+<view class="container">
+  <view class="page-title">我的收藏</view>
+  <view class="empty-state">
+    <view class="empty-icon">☆</view>
+    <text class="empty-text">暂无收藏，快去逛逛吧</text>
+  </view>
+</view>

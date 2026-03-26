@@ -1,0 +1,38 @@
+/* pages/favorite/favorite.wxss */
+.container {
+  background: #FDF6E3;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.page-title {
+  width: 100%;
+  padding: 40rpx 30rpx 24rpx;
+  font-size: 36rpx;
+  font-weight: 700;
+  color: #6B8E5A;
+  text-align: center;
+  letter-spacing: 2rpx;
+}
+
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 200rpx;
+}
+
+.empty-icon {
+  font-size: 120rpx;
+  color: #C8A85A;
+  margin-bottom: 30rpx;
+}
+
+.empty-text {
+  font-size: 28rpx;
+  color: #999;
+  letter-spacing: 1rpx;
+}

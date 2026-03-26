@@ -1,0 +1,85 @@
+/* pages/mine/mine.wxss */
+.container {
+  background: #FDF6E3;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.user-card {
+  background: #6B8E5A;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 60rpx 30rpx 50rpx;
+}
+
+.avatar-wrap {
+  width: 120rpx;
+  height: 120rpx;
+  border-radius: 60rpx;
+  overflow: hidden;
+  border: 4rpx solid rgba(255,255,255,0.6);
+  margin-bottom: 20rpx;
+}
+
+.avatar {
+  width: 120rpx;
+  height: 120rpx;
+}
+
+.nickname {
+  font-size: 30rpx;
+  color: #fff;
+  font-weight: 600;
+  letter-spacing: 2rpx;
+}
+
+.menu-list {
+  background: #fff;
+  border-radius: 20rpx;
+  margin: 30rpx 24rpx 0;
+  overflow: hidden;
+  box-shadow: 0 4rpx 16rpx rgba(107,142,90,0.10);
+}
+
+.menu-item {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  padding: 34rpx 30rpx;
+  border-bottom: 1rpx solid #F0E8D0;
+}
+
+.menu-item.last {
+  border-bottom: none;
+}
+
+.menu-label {
+  font-size: 28rpx;
+  color: #333;
+}
+
+.menu-arrow {
+  font-size: 40rpx;
+  color: #8B6914;
+}
+
+.menu-version {
+  font-size: 26rpx;
+  color: #999;
+}
+
+.footer {
+  margin-top: auto;
+  padding: 50rpx 0 40rpx;
+  display: flex;
+  justify-content: center;
+}
+
+.footer-text {
+  font-size: 24rpx;
+  color: #bbb;
+  letter-spacing: 1rpx;
+}
