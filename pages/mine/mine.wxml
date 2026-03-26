@@ -1,0 +1,37 @@
+<!-- pages/mine/mine.wxml -->
+<view class="container">
+
+  <!-- 用户信息区 -->
+  <view class="user-card">
+    <view class="avatar-wrap">
+      <image class="avatar" src="https://via.placeholder.com/120x120/FDF6E3/8B6914?text=游" mode="aspectFill" />
+    </view>
+    <text class="nickname">游客用户</text>
+  </view>
+
+  <!-- 功能列表 -->
+  <view class="menu-list">
+    <view class="menu-item" bindtap="onMenuTap" data-item="我的足迹">
+      <text class="menu-label">我的足迹</text>
+      <text class="menu-arrow">›</text>
+    </view>
+    <view class="menu-item" bindtap="onMenuTap" data-item="意见反馈">
+      <text class="menu-label">意见反馈</text>
+      <text class="menu-arrow">›</text>
+    </view>
+    <view class="menu-item" bindtap="onMenuTap" data-item="关于我们">
+      <text class="menu-label">关于我们</text>
+      <text class="menu-arrow">›</text>
+    </view>
+    <view class="menu-item last">
+      <text class="menu-label">版本信息</text>
+      <text class="menu-version">{{version}}</text>
+    </view>
+  </view>
+
+  <!-- 底部版权 -->
+  <view class="footer">
+    <text class="footer-text">© 2026 宫墙导览</text>
+  </view>
+
+</view>

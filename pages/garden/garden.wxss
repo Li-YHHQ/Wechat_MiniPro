@@ -1,0 +1,2 @@
+/* pages/garden/garden.wxss */
+@import "../palace/palace.wxss";
