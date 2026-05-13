@@ -1,0 +1,27 @@
+/* pages/drug/index.wxss */
+@import '../dashboard/index.wxss';
+
+.placeholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding-top: 200rpx;
+}
+
+.placeholder-icon {
+  font-size: 120rpx;
+  margin-bottom: 32rpx;
+}
+
+.placeholder-title {
+  font-size: 36rpx;
+  font-weight: 600;
+  color: #0F172A;
+  margin-bottom: 16rpx;
+}
+
+.placeholder-desc {
+  font-size: 26rpx;
+  color: #94A3B8;
+}

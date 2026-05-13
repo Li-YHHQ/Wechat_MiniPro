@@ -4,12 +4,13 @@
   left: 0;
   right: 0;
   height: 100rpx;
-  background: #F5F0E8;
+  background: #FFFFFF;
   display: flex;
   flex-direction: row;
-  border-top: 1rpx solid #E8DDD0;
+  border-top: 1rpx solid #E2E8F0;
   padding-bottom: env(safe-area-inset-bottom);
   z-index: 9999;
+  box-shadow: 0 -2rpx 12rpx rgba(14,165,233,0.08);
 }
 
 .tab-item {
@@ -28,11 +29,11 @@
 
 .tab-text {
   font-size: 20rpx;
-  color: #8C7B6B;
+  color: #94A3B8;
   margin-top: 4rpx;
 }
 
 .tab-item.active .tab-text {
-  color: #8B4513;
+  color: #0EA5E9;
   font-weight: bold;
 }

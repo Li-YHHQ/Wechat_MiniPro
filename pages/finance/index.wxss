@@ -1,0 +1,2 @@
+/* pages/finance/index.wxss */
+@import '../drug/index.wxss';

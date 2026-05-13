@@ -1,0 +1,48 @@
+<!-- pages/dashboard/index.wxml -->
+<view class="page">
+
+  <!-- 头部欢迎区 -->
+  <view class="header">
+    <view class="header-left">
+      <text class="header-title">数据看板</text>
+      <text class="header-sub">今日概览</text>
+    </view>
+    <text class="logout-btn" bindtap="onLogout">退出</text>
+  </view>
+
+  <!-- 统计卡片 -->
+  <view class="stats-grid">
+    <view class="stat-card" wx:for="{{stats}}" wx:key="label">
+      <view class="stat-icon-wrap" style="background:{{item.color}}20;">
+        <text class="stat-icon">{{item.icon}}</text>
+      </view>
+      <view class="stat-info">
+        <text class="stat-value">{{item.value}} <text class="stat-unit">{{item.unit}}</text></text>
+        <text class="stat-label">{{item.label}}</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 快捷入口 -->
+  <view class="section-title">快捷功能</view>
+  <view class="shortcut-grid">
+    <view class="shortcut-item" bindtap="() => wx.switchTab({url:'/pages/drug/index'})">
+      <text class="shortcut-icon">💊</text>
+      <text class="shortcut-text">药品管理</text>
+    </view>
+    <view class="shortcut-item" bindtap="() => wx.switchTab({url:'/pages/stock/index'})">
+      <text class="shortcut-icon">📦</text>
+      <text class="shortcut-text">库存管理</text>
+    </view>
+    <view class="shortcut-item" bindtap="() => wx.switchTab({url:'/pages/finance/index'})">
+      <text class="shortcut-icon">📈</text>
+      <text class="shortcut-text">财务统计</text>
+    </view>
+    <view class="shortcut-item" bindtap="() => wx.switchTab({url:'/pages/mine/index'})">
+      <text class="shortcut-icon">⚙️</text>
+      <text class="shortcut-text">系统设置</text>
+    </view>
+  </view>
+
+  <view style="height: calc(100rpx + env(safe-area-inset-bottom));"></view>
+</view>

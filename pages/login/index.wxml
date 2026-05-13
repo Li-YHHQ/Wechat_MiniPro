@@ -1,0 +1,49 @@
+<!-- pages/login/index.wxml -->
+<view class="login-page">
+
+  <!-- 顶部 Logo 区 -->
+  <view class="logo-area">
+    <text class="logo-icon">💊</text>
+    <text class="logo-title">药店管理系统</text>
+    <text class="logo-sub">MediStock Pro</text>
+  </view>
+
+  <!-- 登录表单卡片 -->
+  <view class="form-card">
+    <view class="form-item">
+      <text class="form-label">用户名</text>
+      <input
+        class="form-input"
+        placeholder="请输入用户名"
+        placeholder-class="input-placeholder"
+        bindinput="onInputUsername"
+        value="{{username}}"
+      />
+    </view>
+
+    <view class="divider"></view>
+
+    <view class="form-item">
+      <text class="form-label">密码</text>
+      <input
+        class="form-input"
+        placeholder="请输入密码"
+        placeholder-class="input-placeholder"
+        password
+        bindinput="onInputPassword"
+        value="{{password}}"
+      />
+    </view>
+
+    <button
+      class="login-btn"
+      bindtap="onLogin"
+      disabled="{{loading}}"
+    >
+      {{loading ? '登录中...' : '立即登录'}}
+    </button>
+  </view>
+
+  <text class="footer-tip">仅限授权药店工作人员使用</text>
+
+</view>
