@@ -6,7 +6,8 @@
     "pages/stock/index",
     "pages/finance/index",
     "pages/mine/index",
-    "pages/detail/index"
+    "pages/detail/index",
+    "pages/drug/add/index"
   ],
   "tabBar": {
     "custom": true,

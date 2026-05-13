@@ -1,2 +1,274 @@
 /* pages/detail/index.wxss */
-@import '../drug/index.wxss';
+.page {
+  background: #F0F9FF;
+  min-height: 100vh;
+}
+
+/* 骨架屏 */
+.skeleton-wrap {
+  padding: 24rpx;
+}
+
+.sk-header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 16rpx;
+  background: #FFFFFF;
+  border-radius: 16rpx;
+  padding: 28rpx 24rpx;
+  margin-bottom: 16rpx;
+}
+
+.sk-title {
+  flex: 1;
+  height: 36rpx;
+  background: linear-gradient(90deg, #E2E8F0 25%, #F1F5F9 50%, #E2E8F0 75%);
+  background-size: 200% 100%;
+  border-radius: 8rpx;
+  animation: shimmer 1.2s infinite;
+}
+
+.sk-badge {
+  width: 100rpx;
+  height: 36rpx;
+  background: linear-gradient(90deg, #E2E8F0 25%, #F1F5F9 50%, #E2E8F0 75%);
+  background-size: 200% 100%;
+  border-radius: 20rpx;
+  animation: shimmer 1.2s infinite;
+}
+
+.sk-card {
+  background: #FFFFFF;
+  border-radius: 16rpx;
+  padding: 24rpx;
+}
+
+.sk-row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 16rpx;
+  padding: 16rpx 0;
+  border-bottom: 1rpx solid #F1F5F9;
+}
+
+.sk-row:last-child {
+  border-bottom: none;
+}
+
+.sk-label {
+  width: 120rpx;
+  height: 28rpx;
+  background: linear-gradient(90deg, #E2E8F0 25%, #F1F5F9 50%, #E2E8F0 75%);
+  background-size: 200% 100%;
+  border-radius: 6rpx;
+  animation: shimmer 1.2s infinite;
+}
+
+.sk-value {
+  flex: 1;
+  height: 28rpx;
+  background: linear-gradient(90deg, #E2E8F0 25%, #F1F5F9 50%, #E2E8F0 75%);
+  background-size: 200% 100%;
+  border-radius: 6rpx;
+  animation: shimmer 1.2s infinite;
+}
+
+@keyframes shimmer {
+  0%   { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+/* 药品头部 */
+.drug-header {
+  background: #FFFFFF;
+  padding: 28rpx 24rpx;
+  margin: 0 0 16rpx;
+  border-bottom: 1rpx solid #E2E8F0;
+}
+
+.drug-name-row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8rpx;
+}
+
+.drug-name {
+  font-size: 36rpx;
+  font-weight: 700;
+  color: #0F172A;
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  margin-right: 16rpx;
+}
+
+.drug-generic {
+  font-size: 24rpx;
+  color: #64748B;
+}
+
+.status-badge {
+  flex-shrink: 0;
+  padding: 6rpx 20rpx;
+  border-radius: 20rpx;
+  font-size: 22rpx;
+}
+
+.status-badge.ok {
+  background: #D1FAE5;
+  color: #059669;
+}
+
+.status-badge.warn {
+  background: #FEF3C7;
+  color: #D97706;
+}
+
+/* 信息卡片 */
+.info-card {
+  background: #FFFFFF;
+  border-radius: 16rpx;
+  margin: 0 16rpx 16rpx;
+  padding: 0 24rpx;
+  box-shadow: 0 2rpx 8rpx rgba(14,165,233,0.06);
+}
+
+.section-title {
+  font-size: 24rpx;
+  font-weight: 600;
+  color: #0EA5E9;
+  padding: 20rpx 0 12rpx;
+  border-bottom: 1rpx solid #F1F5F9;
+  letter-spacing: 1rpx;
+}
+
+/* 查看行 */
+.info-row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 20rpx 0;
+  border-bottom: 1rpx solid #F8FAFC;
+}
+
+.info-row:last-child {
+  border-bottom: none;
+}
+
+.info-label {
+  font-size: 26rpx;
+  color: #64748B;
+  width: 160rpx;
+  flex-shrink: 0;
+}
+
+.info-value {
+  flex: 1;
+  font-size: 28rpx;
+  color: #0F172A;
+  text-align: right;
+}
+
+.info-value.price {
+  font-size: 30rpx;
+  font-weight: 500;
+}
+
+.info-value.accent {
+  color: #0EA5E9;
+  font-weight: 600;
+}
+
+/* 编辑行 */
+.edit-row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 16rpx 0;
+  border-bottom: 1rpx solid #F8FAFC;
+}
+
+.edit-row:last-child {
+  border-bottom: none;
+}
+
+.edit-input {
+  flex: 1;
+  font-size: 28rpx;
+  color: #0F172A;
+  text-align: right;
+  background: transparent;
+  padding: 8rpx 0;
+  border-bottom: 2rpx solid #BAE6FD;
+  margin-left: 16rpx;
+}
+
+/* 空状态 */
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 200rpx;
+  gap: 24rpx;
+}
+
+.empty-icon {
+  font-size: 80rpx;
+}
+
+.empty-text {
+  font-size: 28rpx;
+  color: #94A3B8;
+}
+
+/* 底部按钮栏 */
+.action-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  flex-direction: row;
+  gap: 20rpx;
+  padding: 20rpx 24rpx;
+  padding-bottom: calc(20rpx + env(safe-area-inset-bottom));
+  background: #FFFFFF;
+  border-top: 1rpx solid #E2E8F0;
+  box-shadow: 0 -4rpx 16rpx rgba(0,0,0,0.06);
+}
+
+.btn {
+  flex: 1;
+  height: 88rpx;
+  border-radius: 16rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 30rpx;
+  font-weight: 600;
+}
+
+.btn-primary {
+  background: #0EA5E9;
+  color: #FFFFFF;
+}
+
+.btn-primary.disabled {
+  background: #7DD3FC;
+}
+
+.btn-delete {
+  background: #FEE2E2;
+  color: #EF4444;
+}
+
+.btn-cancel {
+  background: #F1F5F9;
+  color: #64748B;
+}

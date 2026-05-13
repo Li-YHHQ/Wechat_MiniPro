@@ -1,9 +1,74 @@
 <!-- pages/drug/index.wxml -->
 <view class="page">
-  <view class="placeholder">
-    <text class="placeholder-icon">💊</text>
-    <text class="placeholder-title">药品管理</text>
-    <text class="placeholder-desc">药品列表、新增、编辑功能即将上线</text>
+
+  <!-- 顶部搜索 + 新增 -->
+  <view class="toolbar">
+    <view class="search-bar">
+      <text class="search-icon">🔍</text>
+      <input
+        class="search-input"
+        placeholder="搜索药品名称"
+        placeholder-class="search-placeholder"
+        value="{{searchKeyword}}"
+        bindinput="onSearchInput"
+        confirm-type="search"
+      />
+      <text wx:if="{{searchKeyword}}" class="search-clear" bindtap="onSearchClear">✕</text>
+    </view>
+    <view class="add-btn" bindtap="goToAdd">
+      <text class="add-icon">＋</text>
+    </view>
   </view>
+
+  <!-- 加载中骨架 -->
+  <view wx:if="{{loading}}" class="skeleton-list">
+    <view class="skeleton-item" wx:for="{{6}}" wx:key="*this">
+      <view class="sk-left"></view>
+      <view class="sk-right">
+        <view class="sk-line sk-line-lg"></view>
+        <view class="sk-line sk-line-sm"></view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 空状态 -->
+  <view wx:elif="{{!list.length}}" class="empty-state">
+    <text class="empty-icon">💊</text>
+    <text class="empty-text">{{searchKeyword ? '未找到相关药品' : '暂无药品数据'}}</text>
+  </view>
+
+  <!-- 列表 -->
+  <view wx:else class="list">
+    <view
+      class="list-item"
+      wx:for="{{list}}"
+      wx:key="id"
+      bindtap="goToDetail"
+      data-id="{{item.id}}"
+    >
+      <view class="item-main">
+        <view class="item-top">
+          <text class="item-name">{{item.drug_name}}</text>
+          <view class="status-badge {{item.statusOk ? 'ok' : 'warn'}}">
+            <text>{{item.statusOk ? '库存充足' : '库存不足'}}</text>
+          </view>
+        </view>
+        <view class="item-bottom">
+          <text class="item-spec">{{item.specifications || '-'}}</text>
+          <text class="item-stock">库存：{{item.current_stock ?? item.stock_quantity ?? '--'}} {{item.unit}}</text>
+        </view>
+      </view>
+      <text class="item-arrow">›</text>
+    </view>
+
+    <!-- 加载更多 -->
+    <view class="load-more" wx:if="{{loadingMore}}">
+      <text class="load-more-text">加载中...</text>
+    </view>
+    <view class="load-more" wx:elif="{{!hasMore && list.length}}">
+      <text class="load-more-text">— 已加载全部 {{total}} 条 —</text>
+    </view>
+  </view>
+
   <view style="height: calc(100rpx + env(safe-area-inset-bottom));"></view>
 </view>

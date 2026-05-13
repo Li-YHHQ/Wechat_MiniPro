@@ -1,27 +1,228 @@
 /* pages/drug/index.wxss */
-@import '../dashboard/index.wxss';
+.page {
+  background: #F0F9FF;
+  min-height: 100vh;
+}
 
-.placeholder {
+/* 工具栏 */
+.toolbar {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  align-items: center;
+  padding: 20rpx 24rpx;
+  gap: 16rpx;
+  background: #FFFFFF;
+  border-bottom: 1rpx solid #E2E8F0;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.search-bar {
+  flex: 1;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  background: #F1F5F9;
+  border-radius: 40rpx;
+  padding: 0 24rpx;
+  height: 72rpx;
+  gap: 12rpx;
+}
+
+.search-icon {
+  font-size: 28rpx;
+  flex-shrink: 0;
+}
+
+.search-input {
+  flex: 1;
+  font-size: 28rpx;
+  color: #0F172A;
+  height: 72rpx;
+  line-height: 72rpx;
+}
+
+.search-placeholder {
+  color: #94A3B8;
+  font-size: 28rpx;
+}
+
+.search-clear {
+  font-size: 28rpx;
+  color: #94A3B8;
+  flex-shrink: 0;
+}
+
+.add-btn {
+  width: 72rpx;
+  height: 72rpx;
+  background: #0EA5E9;
+  border-radius: 20rpx;
+  display: flex;
   align-items: center;
   justify-content: center;
-  padding-top: 200rpx;
+  flex-shrink: 0;
 }
 
-.placeholder-icon {
-  font-size: 120rpx;
-  margin-bottom: 32rpx;
+.add-icon {
+  font-size: 40rpx;
+  color: #FFFFFF;
+  line-height: 1;
 }
 
-.placeholder-title {
-  font-size: 36rpx;
-  font-weight: 600;
-  color: #0F172A;
+/* 骨架屏 */
+.skeleton-list {
+  padding: 16rpx 24rpx;
+}
+
+.skeleton-item {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 20rpx;
+  background: #FFFFFF;
+  border-radius: 16rpx;
+  padding: 24rpx;
   margin-bottom: 16rpx;
 }
 
-.placeholder-desc {
-  font-size: 26rpx;
+.sk-left {
+  width: 80rpx;
+  height: 80rpx;
+  border-radius: 12rpx;
+  background: #E2E8F0;
+  flex-shrink: 0;
+}
+
+.sk-right {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 12rpx;
+}
+
+.sk-line {
+  height: 28rpx;
+  background: linear-gradient(90deg, #E2E8F0 25%, #F1F5F9 50%, #E2E8F0 75%);
+  background-size: 200% 100%;
+  border-radius: 8rpx;
+  animation: shimmer 1.2s infinite;
+}
+
+.sk-line-lg { width: 60%; }
+.sk-line-sm { width: 40%; }
+
+@keyframes shimmer {
+  0%   { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+/* 空状态 */
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 200rpx;
+  gap: 24rpx;
+}
+
+.empty-icon {
+  font-size: 100rpx;
+}
+
+.empty-text {
+  font-size: 28rpx;
+  color: #94A3B8;
+}
+
+/* 列表 */
+.list {
+  padding: 16rpx 24rpx 0;
+}
+
+.list-item {
+  background: #FFFFFF;
+  border-radius: 16rpx;
+  padding: 24rpx 20rpx;
+  margin-bottom: 16rpx;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  box-shadow: 0 2rpx 8rpx rgba(14,165,233,0.06);
+}
+
+.item-main {
+  flex: 1;
+  min-width: 0;
+}
+
+.item-top {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12rpx;
+}
+
+.item-name {
+  font-size: 30rpx;
+  font-weight: 600;
+  color: #0F172A;
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.status-badge {
+  flex-shrink: 0;
+  margin-left: 12rpx;
+  padding: 4rpx 16rpx;
+  border-radius: 20rpx;
+  font-size: 20rpx;
+}
+
+.status-badge.ok {
+  background: #D1FAE5;
+  color: #059669;
+}
+
+.status-badge.warn {
+  background: #FEF3C7;
+  color: #D97706;
+}
+
+.item-bottom {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 20rpx;
+}
+
+.item-spec {
+  font-size: 24rpx;
+  color: #64748B;
+}
+
+.item-stock {
+  font-size: 24rpx;
+  color: #94A3B8;
+}
+
+.item-arrow {
+  font-size: 44rpx;
+  color: #CBD5E1;
+  margin-left: 8rpx;
+}
+
+.load-more {
+  text-align: center;
+  padding: 24rpx 0;
+}
+
+.load-more-text {
+  font-size: 24rpx;
   color: #94A3B8;
 }
