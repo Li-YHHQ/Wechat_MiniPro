@@ -1,0 +1,149 @@
+<!-- pages/drug/add/index.wxml -->
+<view class="page">
+
+  <view class="form-card">
+    <view class="section-title">基本信息</view>
+
+    <view class="form-row">
+      <text class="form-label">药品名称 <text class="required">*</text></text>
+      <input
+        class="form-input"
+        value="{{form.drug_name}}"
+        placeholder="请输入药品名称"
+        placeholder-class="form-placeholder"
+        data-field="drug_name"
+        bindinput="onFormInput"
+      />
+    </view>
+
+    <view class="form-row">
+      <text class="form-label">通用名</text>
+      <input
+        class="form-input"
+        value="{{form.generic_name}}"
+        placeholder="请输入通用名（选填）"
+        placeholder-class="form-placeholder"
+        data-field="generic_name"
+        bindinput="onFormInput"
+      />
+    </view>
+
+    <view class="form-row">
+      <text class="form-label">药品编码</text>
+      <input
+        class="form-input"
+        value="{{form.drug_code}}"
+        placeholder="请输入药品编码（选填）"
+        placeholder-class="form-placeholder"
+        data-field="drug_code"
+        bindinput="onFormInput"
+      />
+    </view>
+
+    <view class="form-row">
+      <text class="form-label">规格</text>
+      <input
+        class="form-input"
+        value="{{form.specifications}}"
+        placeholder="如：500mg×20片"
+        placeholder-class="form-placeholder"
+        data-field="specifications"
+        bindinput="onFormInput"
+      />
+    </view>
+
+    <view class="form-row">
+      <text class="form-label">单位</text>
+      <input
+        class="form-input"
+        value="{{form.unit}}"
+        placeholder="如：盒、瓶、片"
+        placeholder-class="form-placeholder"
+        data-field="unit"
+        bindinput="onFormInput"
+      />
+    </view>
+
+    <view class="form-row">
+      <text class="form-label">分类</text>
+      <input
+        class="form-input"
+        value="{{form.category}}"
+        placeholder="如：感冒药、消炎药"
+        placeholder-class="form-placeholder"
+        data-field="category"
+        bindinput="onFormInput"
+      />
+    </view>
+
+    <view class="form-row last">
+      <text class="form-label">生产厂家</text>
+      <input
+        class="form-input"
+        value="{{form.manufacturer}}"
+        placeholder="请输入生产厂家（选填）"
+        placeholder-class="form-placeholder"
+        data-field="manufacturer"
+        bindinput="onFormInput"
+      />
+    </view>
+  </view>
+
+  <view class="form-card">
+    <view class="section-title">价格 &amp; 库存</view>
+
+    <view class="form-row">
+      <text class="form-label">进货价</text>
+      <view class="input-with-prefix">
+        <text class="input-prefix">¥</text>
+        <input
+          class="form-input"
+          type="digit"
+          value="{{form.cost_price}}"
+          placeholder="0.00"
+          placeholder-class="form-placeholder"
+          data-field="cost_price"
+          bindinput="onFormInput"
+        />
+      </view>
+    </view>
+
+    <view class="form-row">
+      <text class="form-label">零售价</text>
+      <view class="input-with-prefix">
+        <text class="input-prefix">¥</text>
+        <input
+          class="form-input"
+          type="digit"
+          value="{{form.retail_price}}"
+          placeholder="0.00"
+          placeholder-class="form-placeholder"
+          data-field="retail_price"
+          bindinput="onFormInput"
+        />
+      </view>
+    </view>
+
+    <view class="form-row last">
+      <text class="form-label">预警阈值</text>
+      <input
+        class="form-input"
+        type="number"
+        value="{{form.low_stock_threshold}}"
+        placeholder="最低库存数量"
+        placeholder-class="form-placeholder"
+        data-field="low_stock_threshold"
+        bindinput="onFormInput"
+      />
+    </view>
+  </view>
+
+  <!-- 提交按钮 -->
+  <view class="submit-wrap">
+    <view class="submit-btn {{submitting ? 'disabled' : ''}}" bindtap="onSubmit">
+      <text>{{submitting ? '提交中...' : '确认添加'}}</text>
+    </view>
+  </view>
+
+  <view style="height: calc(40rpx + env(safe-area-inset-bottom));"></view>
+</view>

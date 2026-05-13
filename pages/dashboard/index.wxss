@@ -35,6 +35,28 @@
   border-radius: 40rpx;
 }
 
+/* 骨架屏 */
+.skeleton-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20rpx;
+  margin-bottom: 40rpx;
+}
+
+.skeleton-card {
+  height: 120rpx;
+  background: linear-gradient(90deg, #E2E8F0 25%, #F1F5F9 50%, #E2E8F0 75%);
+  background-size: 200% 100%;
+  border-radius: 20rpx;
+  animation: shimmer 1.2s infinite;
+}
+
+@keyframes shimmer {
+  0%   { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+/* 统计卡片 */
 .stats-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;

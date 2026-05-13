@@ -1,7 +1,7 @@
 <!-- pages/dashboard/index.wxml -->
 <view class="page">
 
-  <!-- 头部欢迎区 -->
+  <!-- 头部 -->
   <view class="header">
     <view class="header-left">
       <text class="header-title">数据看板</text>
@@ -10,14 +10,19 @@
     <text class="logout-btn" bindtap="onLogout">退出</text>
   </view>
 
+  <!-- 加载骨架 -->
+  <view wx:if="{{loading}}" class="skeleton-grid">
+    <view class="skeleton-card" wx:for="{{4}}" wx:key="*this"></view>
+  </view>
+
   <!-- 统计卡片 -->
-  <view class="stats-grid">
+  <view wx:else class="stats-grid">
     <view class="stat-card" wx:for="{{stats}}" wx:key="label">
       <view class="stat-icon-wrap" style="background:{{item.color}}20;">
         <text class="stat-icon">{{item.icon}}</text>
       </view>
       <view class="stat-info">
-        <text class="stat-value">{{item.value}} <text class="stat-unit">{{item.unit}}</text></text>
+        <text class="stat-value">{{item.value}}<text class="stat-unit"> {{item.unit}}</text></text>
         <text class="stat-label">{{item.label}}</text>
       </view>
     </view>
@@ -26,19 +31,19 @@
   <!-- 快捷入口 -->
   <view class="section-title">快捷功能</view>
   <view class="shortcut-grid">
-    <view class="shortcut-item" bindtap="() => wx.switchTab({url:'/pages/drug/index'})">
+    <view class="shortcut-item" bindtap="goToDrug">
       <text class="shortcut-icon">💊</text>
       <text class="shortcut-text">药品管理</text>
     </view>
-    <view class="shortcut-item" bindtap="() => wx.switchTab({url:'/pages/stock/index'})">
+    <view class="shortcut-item" bindtap="goToStock">
       <text class="shortcut-icon">📦</text>
       <text class="shortcut-text">库存管理</text>
     </view>
-    <view class="shortcut-item" bindtap="() => wx.switchTab({url:'/pages/finance/index'})">
+    <view class="shortcut-item" bindtap="goToFinance">
       <text class="shortcut-icon">📈</text>
       <text class="shortcut-text">财务统计</text>
     </view>
-    <view class="shortcut-item" bindtap="() => wx.switchTab({url:'/pages/mine/index'})">
+    <view class="shortcut-item" bindtap="goToMine">
       <text class="shortcut-icon">⚙️</text>
       <text class="shortcut-text">系统设置</text>
     </view>

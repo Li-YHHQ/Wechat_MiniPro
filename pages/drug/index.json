@@ -1,4 +1,8 @@
 {
   "usingComponents": {},
-  "navigationBarTitleText": "药品管理"
+  "navigationBarTitleText": "药品管理",
+  "enablePullDownRefresh": true,
+  "backgroundTextStyle": "light",
+  "backgroundColor": "#F0F9FF",
+  "onReachBottomDistance": 100
 }
