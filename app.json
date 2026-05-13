@@ -7,7 +7,9 @@
     "pages/finance/index",
     "pages/mine/index",
     "pages/detail/index",
-    "pages/drug/add/index"
+    "pages/drug/add/index",
+    "pages/stock/stockin-add/index",
+    "pages/stock/stockout-add/index"
   ],
   "tabBar": {
     "custom": true,

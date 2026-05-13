@@ -1,2 +1,240 @@
 /* pages/stock/index.wxss */
-@import '../drug/index.wxss';
+.page {
+  background: #F0F9FF;
+  min-height: 100vh;
+}
+
+/* 工具栏 */
+.toolbar {
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  background: #FFFFFF;
+  border-bottom: 1rpx solid #E2E8F0;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  padding-right: 24rpx;
+}
+
+.tabs {
+  flex: 1;
+  display: flex;
+  flex-direction: row;
+}
+
+.tab-item {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 24rpx 0 20rpx;
+  font-size: 28rpx;
+  color: #94A3B8;
+  position: relative;
+}
+
+.tab-item.active {
+  color: #0EA5E9;
+  font-weight: 600;
+}
+
+.tab-line {
+  position: absolute;
+  bottom: 0;
+  left: 20%;
+  right: 20%;
+  height: 4rpx;
+  background: #0EA5E9;
+  border-radius: 4rpx;
+}
+
+.add-btn {
+  width: 72rpx;
+  height: 72rpx;
+  background: #0EA5E9;
+  border-radius: 20rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  align-self: center;
+}
+
+.add-icon {
+  font-size: 40rpx;
+  color: #FFFFFF;
+  line-height: 1;
+}
+
+/* 骨架屏 */
+.skeleton-list {
+  padding: 16rpx 24rpx;
+}
+
+.skeleton-item {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 16rpx;
+  background: #FFFFFF;
+  border-radius: 16rpx;
+  padding: 24rpx;
+  margin-bottom: 16rpx;
+}
+
+.sk-body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 12rpx;
+}
+
+.sk-right-col {
+  width: 100rpx;
+}
+
+.sk-line {
+  height: 28rpx;
+  background: linear-gradient(90deg, #E2E8F0 25%, #F1F5F9 50%, #E2E8F0 75%);
+  background-size: 200% 100%;
+  border-radius: 8rpx;
+  animation: shimmer 1.2s infinite;
+}
+
+.sk-lg { width: 70%; }
+.sk-md { width: 80%; }
+.sk-sm { width: 45%; }
+
+@keyframes shimmer {
+  0%   { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+/* 空状态 */
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 200rpx;
+  gap: 24rpx;
+}
+
+.empty-icon { font-size: 100rpx; }
+.empty-text { font-size: 28rpx; color: #94A3B8; }
+
+/* 列表 */
+.list {
+  padding: 16rpx 24rpx 0;
+}
+
+.list-item {
+  background: #FFFFFF;
+  border-radius: 16rpx;
+  padding: 20rpx;
+  margin-bottom: 16rpx;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 16rpx;
+  box-shadow: 0 2rpx 8rpx rgba(14,165,233,0.06);
+}
+
+.item-left {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.type-dot {
+  width: 16rpx;
+  height: 16rpx;
+  border-radius: 50%;
+}
+
+.type-dot.in  { background: #10B981; }
+.type-dot.out { background: #F59E0B; }
+
+.item-main {
+  flex: 1;
+  min-width: 0;
+}
+
+.item-top {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10rpx;
+}
+
+.item-name {
+  font-size: 30rpx;
+  font-weight: 600;
+  color: #0F172A;
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  margin-right: 16rpx;
+}
+
+.item-qty {
+  font-size: 30rpx;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.item-qty.in  { color: #10B981; }
+.item-qty.out { color: #F59E0B; }
+
+.item-bottom {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 16rpx;
+  flex-wrap: wrap;
+}
+
+.item-meta {
+  font-size: 22rpx;
+  color: #64748B;
+}
+
+.item-time {
+  font-size: 22rpx;
+  color: #94A3B8;
+  margin-left: auto;
+}
+
+.item-amount {
+  font-size: 22rpx;
+  color: #0EA5E9;
+  font-weight: 500;
+}
+
+/* 出库类型徽章 */
+.type-badge {
+  padding: 4rpx 14rpx;
+  border-radius: 20rpx;
+  font-size: 20rpx;
+  flex-shrink: 0;
+}
+
+.type-badge.sale { background: #DBEAFE; color: #1D4ED8; }
+.type-badge.loss { background: #FEE2E2; color: #DC2626; }
+.type-badge.ret  { background: #F3E8FF; color: #7C3AED; }
+
+/* 加载更多 */
+.load-more {
+  text-align: center;
+  padding: 24rpx 0;
+}
+
+.load-more-text {
+  font-size: 24rpx;
+  color: #94A3B8;
+}
