@@ -52,9 +52,4 @@ Page({
   goToStock()   { wx.switchTab({ url: '/pages/stock/index' }) },
   goToFinance() { wx.switchTab({ url: '/pages/finance/index' }) },
   goToMine()    { wx.switchTab({ url: '/pages/mine/index' }) },
-
-  onLogout() {
-    wx.removeStorageSync('token')
-    wx.reLaunch({ url: '/pages/login/index' })
-  }
 })
