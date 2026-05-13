@@ -55,7 +55,7 @@
         </view>
         <view class="item-bottom">
           <text class="item-spec">{{item.specifications || '-'}}</text>
-          <text class="item-stock">库存：{{item.current_stock ?? item.stock_quantity ?? '--'}} {{item.unit}}</text>
+          <text class="item-stock">库存：{{item._stock}} {{item.unit}}</text>
         </view>
       </view>
       <text class="item-arrow">›</text>
