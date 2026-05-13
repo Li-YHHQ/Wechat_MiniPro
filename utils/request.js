@@ -20,12 +20,7 @@ const request = (options) => {
       },
       success(res) {
         if (res.statusCode === 401) {
-          if (wx.getStorageSync('token')) {
-            wx.removeStorageSync('token')
-            wx.removeStorageSync('userInfo')
-            wx.reLaunch({ url: '/pages/login/index' })
-          }
-          const err401 = new Error('登录已过期，请重新登录')
+          const err401 = new Error('未授权，请确认登录状态')
           err401.statusCode = 401
           reject(err401)
           return
