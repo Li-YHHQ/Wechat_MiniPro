@@ -1,5 +1,5 @@
 <!-- pages/login/index.wxml -->
-<view class="login-page">
+<view class="login-page" bindtap="dismissKeyboard">
 
   <!-- 顶部 Logo 区 -->
   <view class="logo-area">

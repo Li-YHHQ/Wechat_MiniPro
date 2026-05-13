@@ -15,15 +15,17 @@ Page({
   },
 
   _searchTimer: null,
+  _inited: false,
 
   onShow() {
     if (typeof this.getTabBar === 'function' && this.getTabBar()) {
       this.getTabBar().setData({ selected: 1 })
     }
+    if (this._inited) this.loadList(true)
   },
 
   onLoad() {
-    this.loadList(true)
+    this.loadList(true).finally(() => { this._inited = true })
   },
 
   onPullDownRefresh() {

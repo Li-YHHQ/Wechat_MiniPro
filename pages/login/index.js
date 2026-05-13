@@ -16,6 +16,10 @@ Page({
     this.setData({ password: e.detail.value })
   },
 
+  dismissKeyboard() {
+    wx.hideKeyboard({ complete: () => {} })
+  },
+
   async onLogin() {
     const { username, password } = this.data
     if (!username || !password) {
@@ -31,12 +35,14 @@ Page({
       })
       if (res && res.token) {
         wx.setStorageSync('token', res.token)
+        const userInfo = res.user || res.userInfo || (res.username ? { username: res.username } : null)
+        if (userInfo) wx.setStorageSync('userInfo', userInfo)
         wx.reLaunch({ url: '/pages/dashboard/index' })
       } else {
         wx.showToast({ title: (res && res.message) || '登录失败', icon: 'none' })
       }
     } catch (e) {
-      wx.showToast({ title: '网络错误，请重试', icon: 'none' })
+      wx.showToast({ title: e.message || '登录失败，请重试', icon: 'none' })
     } finally {
       this.setData({ loading: false })
     }

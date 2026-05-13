@@ -12,14 +12,17 @@ Page({
     ]
   },
 
+  _inited: false,
+
   onShow() {
     if (typeof this.getTabBar === 'function' && this.getTabBar()) {
       this.getTabBar().setData({ selected: 0 })
     }
+    if (this._inited) this.loadOverview()
   },
 
   onLoad() {
-    this.loadOverview()
+    this.loadOverview().finally(() => { this._inited = true })
   },
 
   onPullDownRefresh() {
