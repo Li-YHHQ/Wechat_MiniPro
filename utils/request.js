@@ -1,11 +1,6 @@
 // utils/request.js
 const BASE_URL = 'https://medistock.shop/api'
 
-/**
- * 统一请求封装
- * @param {object} options - { url, method, data }
- * @returns {Promise}
- */
 const request = (options) => {
   return new Promise((resolve, reject) => {
     const token = wx.getStorageSync('token')
@@ -20,19 +15,25 @@ const request = (options) => {
       },
       success(res) {
         if (res.statusCode === 401) {
-          const err401 = new Error('未授权，请确认登录状态')
-          err401.statusCode = 401
-          reject(err401)
+          const err = new Error('未授权，请确认登录状态')
+          err.statusCode = 401
+          reject(err)
           return
         }
         if (res.statusCode >= 400) {
-          const d = res.data || {}
-          const errHttp = new Error(d.message || d.msg || d.error || '请求失败，请重试')
-          errHttp.statusCode = res.statusCode
-          reject(errHttp)
+          const body = res.data || {}
+          const err = new Error(body.message || body.msg || body.error || '请求失败，请重试')
+          err.statusCode = res.statusCode
+          reject(err)
           return
         }
-        resolve(res.data)
+        const body = res.data || {}
+        if (body.success === false) {
+          reject(new Error(body.message || '请求失败'))
+          return
+        }
+        // 返回真正的数据层，兼容无 data 包裹的响应
+        resolve(body.data !== undefined ? body.data : body)
       },
       fail(err) {
         reject(new Error(err.errMsg || '网络连接失败，请检查网络'))
