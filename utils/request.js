@@ -25,12 +25,16 @@ const request = (options) => {
             wx.removeStorageSync('userInfo')
             wx.reLaunch({ url: '/pages/login/index' })
           }
-          reject(new Error('登录已过期，请重新登录'))
+          const err401 = new Error('登录已过期，请重新登录')
+          err401.statusCode = 401
+          reject(err401)
           return
         }
         if (res.statusCode >= 400) {
           const d = res.data || {}
-          reject(new Error(d.message || d.msg || d.error || '请求失败，请重试'))
+          const errHttp = new Error(d.message || d.msg || d.error || '请求失败，请重试')
+          errHttp.statusCode = res.statusCode
+          reject(errHttp)
           return
         }
         resolve(res.data)
