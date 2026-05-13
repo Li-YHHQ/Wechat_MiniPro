@@ -5,10 +5,21 @@ Page({
   data: {
     drugId: null,
     drug: null,
+    stockStatus: 'ok',
+    stockLabel:  '库存充足',
     loading: true,
     editing: false,
     saving: false,
     form: {}
+  },
+
+  _calcStatus(drug) {
+    const stock     = drug.current_stock ?? drug.stock_quantity ?? 0
+    const threshold = drug.low_stock_threshold ?? 0
+    return {
+      stockStatus: stock > threshold ? 'ok'   : 'warn',
+      stockLabel:  stock > threshold ? '库存充足' : '库存不足',
+    }
   },
 
   onLoad(options) {
@@ -22,7 +33,7 @@ Page({
     try {
       const res = await request({ url: `/drugs/${id}` })
       const drug = res.data || res
-      this.setData({ drug, loading: false })
+      this.setData({ drug, loading: false, ...this._calcStatus(drug) })
       wx.setNavigationBarTitle({ title: drug.drug_name || '药品详情' })
     } catch (e) {
       this.setData({ loading: false })
@@ -76,7 +87,7 @@ Page({
       }
       const res = await request({ url: `/drugs/${drugId}`, method: 'PUT', data: payload })
       const updated = res.data || res
-      this.setData({ drug: updated, editing: false, form: {} })
+      this.setData({ drug: updated, editing: false, form: {}, ...this._calcStatus(updated) })
       wx.showToast({ title: '保存成功', icon: 'success' })
       wx.setNavigationBarTitle({ title: updated.drug_name || '药品详情' })
     } catch (e) {

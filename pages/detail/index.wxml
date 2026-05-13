@@ -22,8 +22,8 @@
     <view class="drug-header">
       <view class="drug-name-row">
         <text class="drug-name">{{drug.drug_name}}</text>
-        <view class="status-badge {{(drug.current_stock ?? drug.stock_quantity ?? 0) > (drug.low_stock_threshold ?? 0) ? 'ok' : 'warn'}}">
-          <text>{{(drug.current_stock ?? drug.stock_quantity ?? 0) > (drug.low_stock_threshold ?? 0) ? '库存充足' : '库存不足'}}</text>
+        <view class="status-badge {{stockStatus}}">
+          <text>{{stockLabel}}</text>
         </view>
       </view>
       <text class="drug-generic" wx:if="{{drug.generic_name}}">通用名：{{drug.generic_name}}</text>

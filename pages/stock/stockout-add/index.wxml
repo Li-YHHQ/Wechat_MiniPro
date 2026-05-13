@@ -22,18 +22,19 @@
       <view wx:if="{{showDropdown}}" class="drug-dropdown">
         <view wx:if="{{drugSearching}}" class="dropdown-hint">搜索中...</view>
         <view wx:elif="{{!drugResults.length}}" class="dropdown-hint">未找到相关药品</view>
-        <view
-          wx:else
-          class="drug-result-item"
-          wx:for="{{drugResults}}"
-          wx:key="id"
-          bindtap="selectDrug"
-          data-id="{{item.id}}"
-          data-name="{{item.drug_name}}"
-        >
-          <text class="result-name">{{item.drug_name}}</text>
-          <text class="result-spec">{{item.specifications || ''}}</text>
-        </view>
+        <block wx:else>
+          <view
+            class="drug-result-item"
+            wx:for="{{drugResults}}"
+            wx:key="id"
+            bindtap="selectDrug"
+            data-id="{{item.id}}"
+            data-name="{{item.drug_name}}"
+          >
+            <text class="result-name">{{item.drug_name}}</text>
+            <text class="result-spec">{{item.specifications || ''}}</text>
+          </view>
+        </block>
       </view>
     </view>
   </view>
