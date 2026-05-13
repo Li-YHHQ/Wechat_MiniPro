@@ -32,13 +32,13 @@ Page({
   async loadOverview() {
     this.setData({ loading: true })
     try {
-      const res = await request({ url: '/dashboard/overview' })
+      const res = await request({ url: '/dashboard' })
       const data = res.data || res
       const stats = [
-        { label: '今日销售额', value: data.todaySales   ?? '--', unit: '元', icon: '💰', color: '#0EA5E9' },
-        { label: '药品总数',   value: data.totalDrugs   ?? '--', unit: '种', icon: '💊', color: '#10B981' },
-        { label: '库存预警',   value: data.lowStockCount   ?? '--', unit: '种', icon: '⚠️', color: '#F59E0B' },
-        { label: '近效期药品', value: data.nearExpireCount ?? '--', unit: '种', icon: '⏰', color: '#EF4444' }
+        { label: '今日销售额', value: data.todaySalesAmount  ?? '--', unit: '元', icon: '💰', color: '#0EA5E9' },
+        { label: '药品总数',   value: data.totalDrugCount    ?? '--', unit: '种', icon: '💊', color: '#10B981' },
+        { label: '库存预警',   value: data.lowStockCount     ?? '--', unit: '种', icon: '⚠️', color: '#F59E0B' },
+        { label: '近效期药品', value: data.expiringSoonCount ?? '--', unit: '种', icon: '⏰', color: '#EF4444' }
       ]
       this.setData({ stats })
     } catch (e) {
