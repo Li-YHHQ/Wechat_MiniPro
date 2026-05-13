@@ -1,31 +1,29 @@
 {
   "pages": [
-    "pages/palace/palace",
-    "pages/garden/garden",
-    "pages/tower/tower",
-    "pages/favorite/favorite",
-    "pages/mine/mine",
-    "pages/detail/detail",
-    "pages/first/first",
-    "pages/index/index",
-    "pages/logs/logs"
+    "pages/login/index",
+    "pages/dashboard/index",
+    "pages/drug/index",
+    "pages/stock/index",
+    "pages/finance/index",
+    "pages/mine/index",
+    "pages/detail/index"
   ],
   "tabBar": {
     "custom": true,
     "list": [
-      { "pagePath": "pages/palace/palace", "text": "宫殿" },
-      { "pagePath": "pages/garden/garden", "text": "花园" },
-      { "pagePath": "pages/tower/tower", "text": "城楼" },
-      { "pagePath": "pages/favorite/favorite", "text": "收藏" },
-      { "pagePath": "pages/mine/mine", "text": "我的" }
+      { "pagePath": "pages/dashboard/index", "text": "看板" },
+      { "pagePath": "pages/drug/index", "text": "药品" },
+      { "pagePath": "pages/stock/index", "text": "库存" },
+      { "pagePath": "pages/finance/index", "text": "财务" },
+      { "pagePath": "pages/mine/index", "text": "设置" }
     ]
   },
   "window": {
-    "navigationBarBackgroundColor": "#6B3A2A",
-    "navigationBarTitleText": "宫墙导览",
+    "navigationBarBackgroundColor": "#0EA5E9",
+    "navigationBarTitleText": "药店管理",
     "navigationBarTextStyle": "white",
     "enablePullDownRefresh": false,
-    "backgroundColor": "#F5F0E8"
+    "backgroundColor": "#F0F9FF"
   },
   "networkTimeout": {
     "request": 10000

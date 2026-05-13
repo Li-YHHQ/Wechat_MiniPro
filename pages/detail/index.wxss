@@ -1,0 +1,2 @@
+/* pages/detail/index.wxss */
+@import '../drug/index.wxss';

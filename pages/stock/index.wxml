@@ -1,0 +1,9 @@
+<!-- pages/stock/index.wxml -->
+<view class="page">
+  <view class="placeholder">
+    <text class="placeholder-icon">📦</text>
+    <text class="placeholder-title">库存管理</text>
+    <text class="placeholder-desc">入库、出库、库存盘点功能即将上线</text>
+  </view>
+  <view style="height: calc(100rpx + env(safe-area-inset-bottom));"></view>
+</view>

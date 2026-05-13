@@ -1,0 +1,45 @@
+<!-- pages/mine/index.wxml -->
+<view class="page">
+
+  <!-- 用户信息区 -->
+  <view class="user-card">
+    <text class="user-avatar">👤</text>
+    <view class="user-info">
+      <text class="user-name">管理员</text>
+      <text class="user-role">药店管理系统</text>
+    </view>
+  </view>
+
+  <!-- 菜单列表 -->
+  <view class="menu-list">
+    <view class="menu-item">
+      <text class="menu-icon">🏪</text>
+      <text class="menu-label">店铺信息</text>
+      <text class="menu-arrow">›</text>
+    </view>
+    <view class="menu-item">
+      <text class="menu-icon">🔔</text>
+      <text class="menu-label">消息通知</text>
+      <text class="menu-arrow">›</text>
+    </view>
+    <view class="menu-item">
+      <text class="menu-icon">🛡️</text>
+      <text class="menu-label">账号安全</text>
+      <text class="menu-arrow">›</text>
+    </view>
+    <view class="menu-item">
+      <text class="menu-icon">❓</text>
+      <text class="menu-label">帮助与反馈</text>
+      <text class="menu-arrow">›</text>
+    </view>
+    <view class="menu-item last">
+      <text class="menu-icon">ℹ️</text>
+      <text class="menu-label">关于</text>
+      <text class="menu-version">v1.0.0</text>
+    </view>
+  </view>
+
+  <button class="logout-btn" bindtap="onLogout">退出登录</button>
+
+  <view style="height: calc(100rpx + env(safe-area-inset-bottom));"></view>
+</view>

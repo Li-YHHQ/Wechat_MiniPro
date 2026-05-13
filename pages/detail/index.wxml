@@ -1,0 +1,8 @@
+<!-- pages/detail/index.wxml -->
+<view class="page">
+  <view class="placeholder">
+    <text class="placeholder-icon">📄</text>
+    <text class="placeholder-title">详情页</text>
+    <text class="placeholder-desc">药品/订单详情功能即将上线</text>
+  </view>
+</view>
