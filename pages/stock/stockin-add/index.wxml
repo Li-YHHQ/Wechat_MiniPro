@@ -1,0 +1,129 @@
+<!-- pages/stock/stockin-add/index.wxml -->
+<view class="page">
+
+  <view class="form-card">
+    <view class="section-title">药品选择</view>
+
+    <!-- 药品搜索输入 -->
+    <view class="drug-search-wrap">
+      <view class="drug-search-bar">
+        <text class="search-icon-txt">🔍</text>
+        <input
+          class="drug-input"
+          value="{{drugKeyword}}"
+          placeholder="搜索药品名称"
+          placeholder-class="form-placeholder"
+          bindinput="onDrugInput"
+        />
+        <text wx:if="{{drugKeyword}}" class="clear-btn" bindtap="clearDrug">✕</text>
+      </view>
+
+      <!-- 搜索结果下拉 -->
+      <view wx:if="{{showDropdown}}" class="drug-dropdown">
+        <view wx:if="{{drugSearching}}" class="dropdown-hint">搜索中...</view>
+        <view wx:elif="{{!drugResults.length}}" class="dropdown-hint">未找到相关药品</view>
+        <view
+          wx:else
+          class="drug-result-item"
+          wx:for="{{drugResults}}"
+          wx:key="id"
+          bindtap="selectDrug"
+          data-id="{{item.id}}"
+          data-name="{{item.drug_name}}"
+        >
+          <text class="result-name">{{item.drug_name}}</text>
+          <text class="result-spec">{{item.specifications || ''}}</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view class="form-card">
+    <view class="section-title">入库信息</view>
+
+    <view class="form-row">
+      <text class="form-label">批次号</text>
+      <input
+        class="form-input"
+        value="{{form.batch_number}}"
+        placeholder="请输入批次号（选填）"
+        placeholder-class="form-placeholder"
+        data-field="batch_number"
+        bindinput="onFormInput"
+      />
+    </view>
+
+    <view class="form-row">
+      <text class="form-label">入库数量 <text class="required">*</text></text>
+      <input
+        class="form-input"
+        type="number"
+        value="{{form.quantity}}"
+        placeholder="请输入数量"
+        placeholder-class="form-placeholder"
+        data-field="quantity"
+        bindinput="onFormInput"
+      />
+    </view>
+
+    <view class="form-row">
+      <text class="form-label">成本价</text>
+      <view class="input-prefix-wrap">
+        <text class="prefix">¥</text>
+        <input
+          class="form-input"
+          type="digit"
+          value="{{form.cost_price}}"
+          placeholder="0.00"
+          placeholder-class="form-placeholder"
+          data-field="cost_price"
+          bindinput="onFormInput"
+        />
+      </view>
+    </view>
+
+    <view class="form-row">
+      <text class="form-label">生产日期</text>
+      <picker mode="date" value="{{form.production_date}}" bindchange="onProductionDateChange">
+        <view class="picker-value">
+          <text class="{{form.production_date ? '' : 'form-placeholder'}}">
+            {{form.production_date || '请选择日期'}}
+          </text>
+          <text class="picker-arrow">▾</text>
+        </view>
+      </picker>
+    </view>
+
+    <view class="form-row">
+      <text class="form-label">有效期至</text>
+      <picker mode="date" value="{{form.expiry_date}}" bindchange="onExpiryDateChange">
+        <view class="picker-value">
+          <text class="{{form.expiry_date ? '' : 'form-placeholder'}}">
+            {{form.expiry_date || '请选择日期'}}
+          </text>
+          <text class="picker-arrow">▾</text>
+        </view>
+      </picker>
+    </view>
+
+    <view class="form-row last">
+      <text class="form-label">供应商</text>
+      <input
+        class="form-input"
+        value="{{form.supplier}}"
+        placeholder="请输入供应商（选填）"
+        placeholder-class="form-placeholder"
+        data-field="supplier"
+        bindinput="onFormInput"
+      />
+    </view>
+  </view>
+
+  <view class="submit-wrap">
+    <view class="submit-btn {{submitting ? 'disabled' : ''}}" bindtap="onSubmit">
+      <text>{{submitting ? '提交中...' : '确认入库'}}</text>
+    </view>
+  </view>
+
+  <view style="height: calc(40rpx + env(safe-area-inset-bottom));"></view>
+</view>

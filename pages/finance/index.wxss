@@ -1,2 +1,209 @@
 /* pages/finance/index.wxss */
-@import '../drug/index.wxss';
+.page {
+  background: #F0F9FF;
+  min-height: 100vh;
+}
+
+/* 日期范围栏 */
+.date-bar {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  background: #FFFFFF;
+  padding: 20rpx 24rpx;
+  border-bottom: 1rpx solid #E2E8F0;
+  gap: 12rpx;
+}
+
+.date-picker-wrap {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 6rpx;
+}
+
+.date-label {
+  font-size: 20rpx;
+  color: #94A3B8;
+  letter-spacing: 1rpx;
+}
+
+.date-value {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  background: #F1F5F9;
+  border-radius: 12rpx;
+  padding: 12rpx 16rpx;
+  font-size: 26rpx;
+  color: #0F172A;
+}
+
+.date-arrow {
+  font-size: 22rpx;
+  color: #94A3B8;
+}
+
+.date-sep {
+  font-size: 24rpx;
+  color: #CBD5E1;
+  padding-top: 24rpx;
+}
+
+/* 骨架屏 */
+.skeleton-wrap {
+  padding: 16rpx 24rpx;
+}
+
+.sk-stat-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16rpx;
+  margin-bottom: 16rpx;
+}
+
+.sk-stat-card {
+  background: #FFFFFF;
+  border-radius: 16rpx;
+  padding: 24rpx;
+  display: flex;
+  flex-direction: column;
+}
+
+.sk-detail-list {
+  background: #FFFFFF;
+  border-radius: 16rpx;
+  padding: 20rpx 24rpx;
+}
+
+.sk-detail-row {
+  display: flex;
+  flex-direction: row;
+  gap: 20rpx;
+  padding: 16rpx 0;
+  border-bottom: 1rpx solid #F8FAFC;
+}
+
+.sk-detail-row:last-child { border-bottom: none; }
+
+.sk-line {
+  height: 28rpx;
+  background: linear-gradient(90deg, #E2E8F0 25%, #F1F5F9 50%, #E2E8F0 75%);
+  background-size: 200% 100%;
+  border-radius: 8rpx;
+  animation: shimmer 1.2s infinite;
+}
+
+.sk-lg { flex: 2; }
+.sk-md { flex: 1.5; }
+.sk-sm { flex: 1; }
+
+@keyframes shimmer {
+  0%   { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+/* 汇总卡片网格 */
+.summary-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16rpx;
+  padding: 16rpx 24rpx 0;
+}
+
+.summary-card {
+  border-radius: 16rpx;
+  padding: 24rpx 20rpx;
+  display: flex;
+  flex-direction: column;
+  gap: 12rpx;
+}
+
+.summary-card.blue   { background: #EFF6FF; }
+.summary-card.green  { background: #F0FDF4; }
+.summary-card.amber  { background: #FFFBEB; }
+.summary-card.purple { background: #FAF5FF; }
+
+.summary-label {
+  font-size: 22rpx;
+  color: #64748B;
+}
+
+.summary-value-row {
+  display: flex;
+  flex-direction: row;
+  align-items: baseline;
+  gap: 4rpx;
+}
+
+.summary-unit {
+  font-size: 22rpx;
+  color: #64748B;
+}
+
+.summary-value {
+  font-size: 36rpx;
+  font-weight: 700;
+  color: #0F172A;
+}
+
+.summary-card.blue   .summary-value { color: #0EA5E9; }
+.summary-card.green  .summary-value { color: #10B981; }
+.summary-card.amber  .summary-value { color: #D97706; }
+.summary-card.purple .summary-value { color: #7C3AED; }
+
+/* 每日明细 */
+.detail-card {
+  background: #FFFFFF;
+  border-radius: 16rpx;
+  margin: 16rpx 24rpx 0;
+  box-shadow: 0 2rpx 8rpx rgba(14,165,233,0.06);
+  overflow: hidden;
+}
+
+.detail-header {
+  display: flex;
+  flex-direction: row;
+  background: #F8FAFC;
+  padding: 16rpx 20rpx;
+  border-bottom: 1rpx solid #E2E8F0;
+}
+
+.detail-row {
+  display: flex;
+  flex-direction: row;
+  padding: 18rpx 20rpx;
+  border-bottom: 1rpx solid #F8FAFC;
+}
+
+.detail-row:last-child { border-bottom: none; }
+
+.detail-col {
+  font-size: 24rpx;
+  color: #374151;
+}
+
+.detail-header .detail-col {
+  font-size: 22rpx;
+  color: #94A3B8;
+  font-weight: 600;
+}
+
+.date-col  { flex: 2; }
+.num-col   { flex: 1.5; text-align: right; }
+
+.profit-pos { color: #10B981; font-weight: 500; }
+.profit-neg { color: #EF4444; font-weight: 500; }
+
+/* 空状态 */
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 160rpx;
+  gap: 24rpx;
+}
+
+.empty-icon { font-size: 100rpx; }
+.empty-text { font-size: 28rpx; color: #94A3B8; }

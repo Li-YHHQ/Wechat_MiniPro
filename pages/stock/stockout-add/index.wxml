@@ -1,0 +1,93 @@
+<!-- pages/stock/stockout-add/index.wxml -->
+<view class="page">
+
+  <view class="form-card">
+    <view class="section-title">药品选择</view>
+
+    <!-- 药品搜索输入 -->
+    <view class="drug-search-wrap">
+      <view class="drug-search-bar">
+        <text class="search-icon-txt">🔍</text>
+        <input
+          class="drug-input"
+          value="{{drugKeyword}}"
+          placeholder="搜索药品名称"
+          placeholder-class="form-placeholder"
+          bindinput="onDrugInput"
+        />
+        <text wx:if="{{drugKeyword}}" class="clear-btn" bindtap="clearDrug">✕</text>
+      </view>
+
+      <!-- 搜索结果下拉 -->
+      <view wx:if="{{showDropdown}}" class="drug-dropdown">
+        <view wx:if="{{drugSearching}}" class="dropdown-hint">搜索中...</view>
+        <view wx:elif="{{!drugResults.length}}" class="dropdown-hint">未找到相关药品</view>
+        <view
+          wx:else
+          class="drug-result-item"
+          wx:for="{{drugResults}}"
+          wx:key="id"
+          bindtap="selectDrug"
+          data-id="{{item.id}}"
+          data-name="{{item.drug_name}}"
+        >
+          <text class="result-name">{{item.drug_name}}</text>
+          <text class="result-spec">{{item.specifications || ''}}</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view class="form-card">
+    <view class="section-title">出库信息</view>
+
+    <view class="form-row">
+      <text class="form-label">出库数量 <text class="required">*</text></text>
+      <input
+        class="form-input"
+        type="number"
+        value="{{form.quantity}}"
+        placeholder="请输入数量"
+        placeholder-class="form-placeholder"
+        data-field="quantity"
+        bindinput="onFormInput"
+      />
+    </view>
+
+    <view class="form-row">
+      <text class="form-label">出库类型 <text class="required">*</text></text>
+      <picker
+        mode="selector"
+        range="{{outTypes}}"
+        range-key="label"
+        value="{{outTypeIndex}}"
+        bindchange="onOutTypeChange"
+      >
+        <view class="picker-value">
+          <text>{{outTypes[outTypeIndex].label}}</text>
+          <text class="picker-arrow">▾</text>
+        </view>
+      </picker>
+    </view>
+
+    <view class="form-row last">
+      <text class="form-label">备注</text>
+      <input
+        class="form-input"
+        value="{{form.remark}}"
+        placeholder="请输入备注（选填）"
+        placeholder-class="form-placeholder"
+        data-field="remark"
+        bindinput="onFormInput"
+      />
+    </view>
+  </view>
+
+  <view class="submit-wrap">
+    <view class="submit-btn {{submitting ? 'disabled' : ''}}" bindtap="onSubmit">
+      <text>{{submitting ? '提交中...' : '确认出库'}}</text>
+    </view>
+  </view>
+
+  <view style="height: calc(40rpx + env(safe-area-inset-bottom));"></view>
+</view>
