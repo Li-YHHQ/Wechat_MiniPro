@@ -40,7 +40,7 @@
       bindtap="onLogin"
       disabled="{{loading}}"
     >
-      {{loading ? '登录中...' : '立即登录'}}
+      <text wx:if="{{loading}}">登录中...</text><text wx:else>立即登录</text>
     </button>
   </view>
 

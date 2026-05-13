@@ -31,17 +31,16 @@ Page({
     this.setData({ loading: true })
     try {
       const res = await request({
-        url: '/auth/login',
+        url: '/users/login',
         method: 'POST',
         data: { username, password }
       })
       if (res && res.token) {
         wx.setStorageSync('token', res.token)
-        const userInfo = res.user || res.userInfo || (res.username ? { username: res.username } : null)
-        if (userInfo) wx.setStorageSync('userInfo', userInfo)
+        wx.setStorageSync('userInfo', { username, role: res.role || '' })
         wx.reLaunch({ url: '/pages/dashboard/index' })
       } else {
-        wx.showToast({ title: (res && res.message) || '登录失败', icon: 'none' })
+        wx.showToast({ title: '登录失败，请重试', icon: 'none' })
       }
     } catch (e) {
       let msg
