@@ -22,6 +22,7 @@ Page({
 
   async onLogin() {
     console.log('login clicked')
+    console.log('username:', this.data.username, 'password:', this.data.password)
     const { username, password } = this.data
     if (!username || !password) {
       wx.showToast({ title: '请输入用户名和密码', icon: 'none' })
@@ -43,7 +44,15 @@ Page({
         wx.showToast({ title: (res && res.message) || '登录失败', icon: 'none' })
       }
     } catch (e) {
-      wx.showToast({ title: e.message || '登录失败，请重试', icon: 'none' })
+      let msg
+      if (e.statusCode === 401) {
+        msg = '用户名或密码错误'
+      } else if (!e.statusCode) {
+        msg = '网络异常，请检查连接'
+      } else {
+        msg = e.message || '登录失败，请重试'
+      }
+      wx.showToast({ title: msg, icon: 'none' })
     } finally {
       this.setData({ loading: false })
     }
