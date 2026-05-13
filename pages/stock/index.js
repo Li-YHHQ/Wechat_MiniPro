@@ -22,14 +22,21 @@ Page({
     outLoading: false, outLoadingMore: false,
   },
 
+  _inited: false,
+
   onShow() {
     if (typeof this.getTabBar === 'function' && this.getTabBar()) {
       this.getTabBar().setData({ selected: 2 })
     }
+    if (this._inited) {
+      const { activeTab } = this.data
+      if (activeTab === 0) this.loadIn(true)
+      else this.loadOut(true)
+    }
   },
 
   onLoad() {
-    this.loadIn(true)
+    this.loadIn(true).finally(() => { this._inited = true })
   },
 
   onPullDownRefresh() {

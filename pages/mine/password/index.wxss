@@ -1,0 +1,96 @@
+/* pages/mine/password/index.wxss */
+.page {
+  background: #F0F9FF;
+  min-height: 100vh;
+  padding-top: 16rpx;
+}
+
+.form-card {
+  background: #FFFFFF;
+  border-radius: 16rpx;
+  margin: 0 16rpx 16rpx;
+  padding: 0 24rpx;
+  box-shadow: 0 2rpx 8rpx rgba(14,165,233,0.06);
+}
+
+.section-title {
+  font-size: 24rpx;
+  font-weight: 600;
+  color: #0EA5E9;
+  padding: 20rpx 0 12rpx;
+  border-bottom: 1rpx solid #F1F5F9;
+  letter-spacing: 1rpx;
+}
+
+.form-row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  min-height: 88rpx;
+  border-bottom: 1rpx solid #F8FAFC;
+}
+
+.form-row.last {
+  border-bottom: none;
+}
+
+.form-label {
+  font-size: 28rpx;
+  color: #374151;
+  width: 160rpx;
+  flex-shrink: 0;
+}
+
+.form-input {
+  flex: 1;
+  font-size: 28rpx;
+  color: #0F172A;
+  text-align: right;
+  height: 88rpx;
+  line-height: 88rpx;
+}
+
+.form-placeholder {
+  color: #CBD5E1;
+  font-size: 26rpx;
+}
+
+/* 提示卡片 */
+.hint-card {
+  margin: 0 16rpx 24rpx;
+  background: #EFF6FF;
+  border-radius: 12rpx;
+  padding: 20rpx 24rpx;
+  display: flex;
+  flex-direction: column;
+  gap: 8rpx;
+}
+
+.hint-text {
+  font-size: 22rpx;
+  color: #3B82F6;
+  line-height: 1.6;
+}
+
+/* 提交按钮 */
+.submit-wrap {
+  padding: 8rpx 16rpx 24rpx;
+}
+
+.submit-btn {
+  height: 96rpx;
+  background: #0EA5E9;
+  border-radius: 20rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 32rpx;
+  font-weight: 600;
+  color: #FFFFFF;
+  box-shadow: 0 4rpx 16rpx rgba(14,165,233,0.3);
+}
+
+.submit-btn.disabled {
+  background: #7DD3FC;
+  box-shadow: none;
+}

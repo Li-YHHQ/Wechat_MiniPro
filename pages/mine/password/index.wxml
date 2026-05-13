@@ -1,0 +1,57 @@
+<!-- pages/mine/password/index.wxml -->
+<view class="page">
+
+  <view class="form-card">
+    <view class="section-title">修改密码</view>
+
+    <view class="form-row">
+      <text class="form-label">旧密码</text>
+      <input
+        class="form-input"
+        password
+        value="{{oldPassword}}"
+        placeholder="请输入旧密码"
+        placeholder-class="form-placeholder"
+        bindinput="onOldPasswordInput"
+      />
+    </view>
+
+    <view class="form-row">
+      <text class="form-label">新密码</text>
+      <input
+        class="form-input"
+        password
+        value="{{newPassword}}"
+        placeholder="至少6位"
+        placeholder-class="form-placeholder"
+        bindinput="onNewPasswordInput"
+      />
+    </view>
+
+    <view class="form-row last">
+      <text class="form-label">确认新密码</text>
+      <input
+        class="form-input"
+        password
+        value="{{confirmPassword}}"
+        placeholder="再次输入新密码"
+        placeholder-class="form-placeholder"
+        bindinput="onConfirmPasswordInput"
+      />
+    </view>
+  </view>
+
+  <view class="hint-card">
+    <text class="hint-text">• 密码长度至少6位</text>
+    <text class="hint-text">• 建议使用字母+数字组合</text>
+    <text class="hint-text">• 修改成功后请记好新密码</text>
+  </view>
+
+  <view class="submit-wrap">
+    <view class="submit-btn {{submitting ? 'disabled' : ''}}" bindtap="onSubmit">
+      <text>{{submitting ? '提交中...' : '确认修改'}}</text>
+    </view>
+  </view>
+
+  <view style="height: calc(40rpx + env(safe-area-inset-bottom));"></view>
+</view>

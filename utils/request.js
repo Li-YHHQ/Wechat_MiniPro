@@ -20,15 +20,23 @@ const request = (options) => {
       },
       success(res) {
         if (res.statusCode === 401) {
-          wx.removeStorageSync('token')
-          wx.reLaunch({ url: '/pages/login/index' })
-          reject(new Error('Unauthorized'))
+          if (wx.getStorageSync('token')) {
+            wx.removeStorageSync('token')
+            wx.removeStorageSync('userInfo')
+            wx.reLaunch({ url: '/pages/login/index' })
+          }
+          reject(new Error('登录已过期，请重新登录'))
+          return
+        }
+        if (res.statusCode >= 400) {
+          const d = res.data || {}
+          reject(new Error(d.message || d.msg || d.error || '请求失败，请重试'))
           return
         }
         resolve(res.data)
       },
       fail(err) {
-        reject(err)
+        reject(new Error(err.errMsg || '网络连接失败，请检查网络'))
       }
     })
   })
