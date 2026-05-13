@@ -103,7 +103,7 @@
         </view>
         <view class="info-row">
           <text class="info-label">当前库存</text>
-          <text class="info-value">{{drug.current_stock ?? drug.stock_quantity ?? '--'}} {{drug.unit}}</text>
+          <text class="info-value">{{stockDisplay}} {{drug.unit}}</text>
         </view>
         <view class="info-row">
           <text class="info-label">预警阈值</text>

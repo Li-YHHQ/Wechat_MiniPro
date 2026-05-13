@@ -70,7 +70,8 @@ Page({
       const raw = res.data || res
       const items = (Array.isArray(raw) ? raw : raw.list || raw.data || []).map(item => ({
         ...item,
-        statusOk: (item.current_stock ?? item.stock_quantity ?? 0) > (item.low_stock_threshold ?? 0)
+        statusOk: (item.current_stock ?? item.stock_quantity ?? 0) > (item.low_stock_threshold ?? 0),
+        _stock:   item.current_stock ?? item.stock_quantity ?? '--',
       }))
       const total = raw.total ?? items.length
 

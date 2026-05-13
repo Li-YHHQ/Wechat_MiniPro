@@ -5,8 +5,9 @@ Page({
   data: {
     drugId: null,
     drug: null,
-    stockStatus: 'ok',
-    stockLabel:  '库存充足',
+    stockStatus:  'ok',
+    stockLabel:   '库存充足',
+    stockDisplay: '--',
     loading: true,
     editing: false,
     saving: false,
@@ -17,8 +18,9 @@ Page({
     const stock     = drug.current_stock ?? drug.stock_quantity ?? 0
     const threshold = drug.low_stock_threshold ?? 0
     return {
-      stockStatus: stock > threshold ? 'ok'   : 'warn',
-      stockLabel:  stock > threshold ? '库存充足' : '库存不足',
+      stockStatus:  stock > threshold ? 'ok'   : 'warn',
+      stockLabel:   stock > threshold ? '库存充足' : '库存不足',
+      stockDisplay: drug.current_stock ?? drug.stock_quantity ?? '--',
     }
   },
 
