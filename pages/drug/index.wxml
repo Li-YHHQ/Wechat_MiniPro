@@ -1,26 +1,37 @@
 <!-- pages/drug/index.wxml -->
 <view class="page">
 
-  <!-- 顶部搜索 + 新增 -->
-  <view class="toolbar">
-    <view class="search-bar">
-      <text class="search-icon">🔍</text>
-      <input
-        class="search-input"
-        placeholder="搜索药品名称"
-        placeholder-class="search-placeholder"
-        value="{{searchKeyword}}"
-        bindinput="onSearchInput"
-        confirm-type="search"
-      />
-      <text wx:if="{{searchKeyword}}" class="search-clear" bindtap="onSearchClear">✕</text>
-    </view>
-    <view class="add-btn" bindtap="goToAdd">
-      <text class="add-icon">＋</text>
+  <!-- 渐变 Hero + 搜索 -->
+  <view class="hero">
+    <view class="blob blob-1"></view>
+    <view class="blob blob-2"></view>
+    <view class="hero-content">
+      <view class="hero-row">
+        <view>
+          <text class="hero-title">药品管理</text>
+          <text class="hero-sub">共收录 {{total || 0}} 种药品</text>
+        </view>
+      </view>
+
+      <!-- 玻璃质感搜索框 -->
+      <view class="search-bar glass {{searchFocused ? 'focused' : ''}}">
+        <text class="search-icon">🔍</text>
+        <input
+          class="search-input"
+          placeholder="搜索药品名称、编码"
+          placeholder-class="search-placeholder"
+          value="{{searchKeyword}}"
+          bindinput="onSearchInput"
+          bindfocus="onSearchFocus"
+          bindblur="onSearchBlur"
+          confirm-type="search"
+        />
+        <text wx:if="{{searchKeyword}}" class="search-clear" bindtap="onSearchClear">✕</text>
+      </view>
     </view>
   </view>
 
-  <!-- 加载中骨架 -->
+  <!-- 骨架屏 -->
   <view wx:if="{{loading}}" class="skeleton-list">
     <view class="skeleton-item" wx:for="{{6}}" wx:key="*this">
       <view class="sk-left"></view>
@@ -33,8 +44,11 @@
 
   <!-- 空状态 -->
   <view wx:elif="{{!list.length}}" class="empty-state">
-    <text class="empty-icon">💊</text>
+    <view class="empty-icon-wrap">
+      <text class="empty-icon">💊</text>
+    </view>
     <text class="empty-text">{{searchKeyword ? '未找到相关药品' : '暂无药品数据'}}</text>
+    <text wx:if="{{!searchKeyword}}" class="empty-hint">点击右下角 + 添加第一款药品</text>
   </view>
 
   <!-- 列表 -->
@@ -46,29 +60,50 @@
       bindtap="goToDetail"
       data-id="{{item.id}}"
     >
+      <!-- 左侧图标 -->
+      <view class="item-icon-wrap {{item._tint}}">
+        <text class="item-initial">{{item._initial}}</text>
+      </view>
+
+      <!-- 中间信息 -->
       <view class="item-main">
         <view class="item-top">
-          <text class="item-name">{{item.drug_name}}</text>
-          <view class="status-badge {{item.statusOk ? 'ok' : 'warn'}}">
-            <text>{{item.statusLabel}}</text>
+          <text class="item-name">{{item._name}}</text>
+          <view class="status-badge {{item._statusOk ? 'ok' : 'warn'}}">
+            <text>{{item._statusLabel}}</text>
           </view>
         </view>
+
+        <view class="item-meta">
+          <text wx:if="{{item._spec}}" class="item-spec">{{item._spec}}</text>
+          <text wx:if="{{item._manuf}}" class="item-manuf">{{item._manuf}}</text>
+        </view>
+
         <view class="item-bottom">
-          <text class="item-spec">{{item.specifications || '-'}}</text>
-          <text class="item-stock">库存：{{item._stock}} {{item.unit}}</text>
+          <view wx:if="{{item._category}}" class="category-chip">{{item._category}}</view>
+          <view class="item-price-row">
+            <text class="price-tag">¥{{item._retail}}</text>
+            <text class="stock-tag">阈值 {{item._stockMin}} {{item.unit || ''}}</text>
+          </view>
         </view>
       </view>
-      <text class="item-arrow">›</text>
     </view>
 
     <!-- 加载更多 -->
     <view class="load-more" wx:if="{{loadingMore}}">
-      <text class="load-more-text">加载中...</text>
+      <view class="dot-loader">
+        <view class="dot"></view><view class="dot"></view><view class="dot"></view>
+      </view>
     </view>
     <view class="load-more" wx:elif="{{!hasMore && list.length}}">
       <text class="load-more-text">— 已加载全部 {{total}} 条 —</text>
     </view>
   </view>
 
-  <view style="height: calc(100rpx + env(safe-area-inset-bottom));"></view>
+  <!-- 浮动新增按钮 -->
+  <view class="fab" bindtap="goToAdd">
+    <text class="fab-icon">＋</text>
+  </view>
+
+  <view style="height: calc(120rpx + env(safe-area-inset-bottom));"></view>
 </view>
