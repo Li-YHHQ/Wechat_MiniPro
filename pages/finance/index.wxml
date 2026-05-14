@@ -1,40 +1,45 @@
 <!-- pages/finance/index.wxml -->
 <view class="page">
 
-  <!-- 日期范围选择器 -->
-  <view class="date-bar">
-    <view class="date-picker-wrap">
-      <text class="date-label">开始日期</text>
-      <picker mode="date" value="{{startDate}}" bindchange="onStartDateChange">
-        <view class="date-value">
-          <text>{{startDate}}</text>
-          <text class="date-arrow">▾</text>
-        </view>
-      </picker>
-    </view>
-    <text class="date-sep">—</text>
-    <view class="date-picker-wrap">
-      <text class="date-label">结束日期</text>
-      <picker mode="date" value="{{endDate}}" bindchange="onEndDateChange">
-        <view class="date-value">
-          <text>{{endDate}}</text>
-          <text class="date-arrow">▾</text>
-        </view>
-      </picker>
+  <!-- 渐变 Hero -->
+  <view class="hero">
+    <view class="blob blob-1"></view>
+    <view class="blob blob-2"></view>
+    <view class="hero-content">
+      <text class="hero-title">财务统计</text>
+      <text class="hero-sub">查看销售与利润数据</text>
+
+      <!-- 玻璃日期选择 -->
+      <view class="date-bar glass">
+        <picker mode="date" value="{{startDate}}" bindchange="onStartDateChange" class="date-picker-wrap">
+          <view class="date-cell">
+            <text class="date-label">开始</text>
+            <text class="date-value">{{startDate}}</text>
+          </view>
+        </picker>
+        <view class="date-sep">→</view>
+        <picker mode="date" value="{{endDate}}" bindchange="onEndDateChange" class="date-picker-wrap">
+          <view class="date-cell">
+            <text class="date-label">结束</text>
+            <text class="date-value">{{endDate}}</text>
+          </view>
+        </picker>
+      </view>
     </view>
   </view>
 
   <!-- 骨架屏 -->
-  <view wx:if="{{loading}}" class="skeleton-wrap">
-    <view class="sk-stat-grid">
-      <view class="sk-stat-card" wx:for="{{4}}" wx:key="*this">
-        <view class="sk-line sk-lg"></view>
-        <view class="sk-line sk-sm" style="margin-top:16rpx;"></view>
+  <view wx:if="{{loading}}" class="content">
+    <view class="summary-grid">
+      <view class="summary-card skeleton" wx:for="{{4}}" wx:key="*this">
+        <view class="sk-line sk-sm"></view>
+        <view class="sk-line sk-lg" style="margin-top:16rpx;"></view>
       </view>
     </view>
-    <view class="sk-detail-list">
-      <view class="sk-detail-row" wx:for="{{5}}" wx:key="*this">
-        <view class="sk-line sk-md"></view>
+    <view class="detail-card">
+      <view class="sk-row" wx:for="{{5}}" wx:key="*this">
+        <view class="sk-line sk-sm"></view>
+        <view class="sk-line sk-sm"></view>
         <view class="sk-line sk-sm"></view>
         <view class="sk-line sk-sm"></view>
       </view>
@@ -42,68 +47,73 @@
   </view>
 
   <block wx:elif="{{summary}}">
+    <view class="content">
 
-    <!-- 汇总卡片 -->
-    <view class="summary-grid">
-      <view class="summary-card blue">
-        <text class="summary-label">总销售额</text>
-        <view class="summary-value-row">
-          <text class="summary-unit">¥</text>
-          <text class="summary-value">{{summary.totalSales}}</text>
+      <!-- 汇总卡片 4 宫格 -->
+      <view class="summary-grid">
+        <view class="summary-card">
+          <view class="sc-icon tint-blue"><text>💰</text></view>
+          <view class="sc-info">
+            <text class="sc-label">总销售额</text>
+            <text class="sc-value">¥{{summary.totalSales}}</text>
+          </view>
+        </view>
+        <view class="summary-card">
+          <view class="sc-icon tint-amber"><text>💸</text></view>
+          <view class="sc-info">
+            <text class="sc-label">总成本</text>
+            <text class="sc-value">¥{{summary.totalCost}}</text>
+          </view>
+        </view>
+        <view class="summary-card">
+          <view class="sc-icon tint-emerald"><text>📈</text></view>
+          <view class="sc-info">
+            <text class="sc-label">毛利润</text>
+            <text class="sc-value {{summary.grossProfit >= 0 ? '' : 'profit-neg'}}">¥{{summary.grossProfit}}</text>
+          </view>
+        </view>
+        <view class="summary-card">
+          <view class="sc-icon tint-violet"><text>📊</text></view>
+          <view class="sc-info">
+            <text class="sc-label">毛利率</text>
+            <text class="sc-value">{{summary.grossMargin}}%</text>
+          </view>
         </view>
       </view>
-      <view class="summary-card green">
-        <text class="summary-label">总成本</text>
-        <view class="summary-value-row">
-          <text class="summary-unit">¥</text>
-          <text class="summary-value">{{summary.totalCost}}</text>
+
+      <!-- 每日明细 -->
+      <view class="section-row">
+        <text class="section-title">每日明细</text>
+      </view>
+      <view wx:if="{{details.length}}" class="detail-card">
+        <view class="detail-header">
+          <text class="detail-col date-col">日期</text>
+          <text class="detail-col num-col">销售</text>
+          <text class="detail-col num-col">成本</text>
+          <text class="detail-col num-col">利润</text>
+        </view>
+        <view class="detail-row" wx:for="{{details}}" wx:key="_date">
+          <text class="detail-col date-col">{{item._date}}</text>
+          <text class="detail-col num-col">{{item._sales}}</text>
+          <text class="detail-col num-col">{{item._cost}}</text>
+          <text class="detail-col num-col {{item._profit >= 0 ? 'profit-pos' : 'profit-neg'}}">{{item._profit}}</text>
         </view>
       </view>
-      <view class="summary-card amber">
-        <text class="summary-label">毛利润</text>
-        <view class="summary-value-row">
-          <text class="summary-unit">¥</text>
-          <text class="summary-value">{{summary.grossProfit}}</text>
-        </view>
-      </view>
-      <view class="summary-card purple">
-        <text class="summary-label">毛利率</text>
-        <view class="summary-value-row">
-          <text class="summary-value">{{summary.grossMargin}}</text>
-          <text class="summary-unit">%</text>
-        </view>
+
+      <view wx:else class="empty-state-inline">
+        <text class="empty-icon-sm">📭</text>
+        <text class="empty-text-sm">该时段暂无明细</text>
       </view>
     </view>
-
-    <!-- 每日明细 -->
-    <view wx:if="{{details.length}}" class="detail-card">
-      <view class="detail-header">
-        <text class="detail-col date-col">日期</text>
-        <text class="detail-col num-col">销售额</text>
-        <text class="detail-col num-col">成本</text>
-        <text class="detail-col num-col">利润</text>
-      </view>
-      <view class="detail-row" wx:for="{{details}}" wx:key="_date">
-        <text class="detail-col date-col">{{item._date}}</text>
-        <text class="detail-col num-col">{{item._sales}}</text>
-        <text class="detail-col num-col">{{item._cost}}</text>
-        <text class="detail-col num-col {{item._profit >= 0 ? 'profit-pos' : 'profit-neg'}}">{{item._profit}}</text>
-      </view>
-    </view>
-
-    <!-- 无明细 -->
-    <view wx:else class="empty-state">
-      <text class="empty-icon">📊</text>
-      <text class="empty-text">该时段暂无明细数据</text>
-    </view>
-
   </block>
 
-  <!-- 首次加载前空状态 -->
-  <view wx:elif="{{!loading}}" class="empty-state">
-    <text class="empty-icon">📊</text>
-    <text class="empty-text">暂无数据</text>
+  <view wx:elif="{{!loading}}" class="content">
+    <view class="empty-state">
+      <view class="empty-icon-wrap"><text class="empty-icon">📊</text></view>
+      <text class="empty-text">暂无数据</text>
+      <text class="empty-hint">下拉刷新或调整日期范围</text>
+    </view>
   </view>
 
-  <view style="height: calc(100rpx + env(safe-area-inset-bottom));"></view>
+  <view style="height: calc(120rpx + env(safe-area-inset-bottom));"></view>
 </view>

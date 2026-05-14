@@ -1,58 +1,49 @@
 <!-- pages/stock/index.wxml -->
 <view class="page">
 
-  <!-- Tab栏 + 新增按钮 -->
-  <view class="toolbar">
-    <view class="tabs">
-      <view
-        class="tab-item {{activeTab === 0 ? 'active' : ''}}"
-        bindtap="switchTab"
-        data-tab="{{0}}"
-      >
-        <text>入库记录</text>
-        <view wx:if="{{activeTab === 0}}" class="tab-line"></view>
+  <!-- 渐变 Hero + 玻璃 Tab -->
+  <view class="hero">
+    <view class="blob blob-1"></view>
+    <view class="blob blob-2"></view>
+    <view class="hero-content">
+      <text class="hero-title">库存管理</text>
+      <text class="hero-sub">{{activeTab === 0 ? '入库记录 · 共 ' + (inTotal || 0) + ' 条' : '出库记录 · 共 ' + (outTotal || 0) + ' 条'}}</text>
+
+      <view class="tab-bar glass">
+        <view class="tab-pill {{activeTab === 0 ? 'active' : ''}}" bindtap="switchTab" data-tab="{{0}}">
+          <text class="tab-emoji">📥</text>
+          <text>入库</text>
+        </view>
+        <view class="tab-pill {{activeTab === 1 ? 'active' : ''}}" bindtap="switchTab" data-tab="{{1}}">
+          <text class="tab-emoji">📤</text>
+          <text>出库</text>
+        </view>
       </view>
-      <view
-        class="tab-item {{activeTab === 1 ? 'active' : ''}}"
-        bindtap="switchTab"
-        data-tab="{{1}}"
-      >
-        <text>出库记录</text>
-        <view wx:if="{{activeTab === 1}}" class="tab-line"></view>
-      </view>
-    </view>
-    <view class="add-btn" bindtap="goToAdd">
-      <text class="add-icon">＋</text>
     </view>
   </view>
 
-  <!-- ===== 入库记录 Tab ===== -->
-  <view wx:if="{{activeTab === 0}}">
-
-    <!-- 骨架屏 -->
+  <!-- ===== 入库 ===== -->
+  <view wx:if="{{activeTab === 0}}" class="content">
     <view wx:if="{{inLoading}}" class="skeleton-list">
       <view class="skeleton-item" wx:for="{{6}}" wx:key="*this">
+        <view class="sk-left"></view>
         <view class="sk-body">
           <view class="sk-line sk-lg"></view>
           <view class="sk-line sk-sm"></view>
         </view>
-        <view class="sk-right-col">
-          <view class="sk-line sk-md"></view>
-        </view>
       </view>
     </view>
 
-    <!-- 空状态 -->
     <view wx:elif="{{!inList.length}}" class="empty-state">
-      <text class="empty-icon">📦</text>
+      <view class="empty-icon-wrap"><text class="empty-icon">📦</text></view>
       <text class="empty-text">暂无入库记录</text>
+      <text class="empty-hint">点击右下角 + 添加入库</text>
     </view>
 
-    <!-- 列表 -->
     <view wx:else class="list">
       <view class="list-item" wx:for="{{inList}}" wx:key="id">
-        <view class="item-left">
-          <view class="type-dot in"></view>
+        <view class="item-icon-wrap in-tint">
+          <text class="item-icon-emoji">📥</text>
         </view>
         <view class="item-main">
           <view class="item-top">
@@ -60,49 +51,43 @@
             <text class="item-qty in">+{{item._qty}}</text>
           </view>
           <view class="item-bottom">
-            <text class="item-meta">批次：{{item._batch}}</text>
+            <view class="meta-chip">批次 {{item._batch}}</view>
             <text class="item-time">{{item._time}}</text>
           </view>
         </view>
       </view>
 
       <view class="load-more" wx:if="{{inLoadingMore}}">
-        <text class="load-more-text">加载中...</text>
+        <view class="dot-loader"><view class="dot"></view><view class="dot"></view><view class="dot"></view></view>
       </view>
       <view class="load-more" wx:elif="{{!inHasMore && inList.length}}">
         <text class="load-more-text">— 已加载全部 {{inTotal}} 条 —</text>
       </view>
     </view>
-
   </view>
 
-  <!-- ===== 出库记录 Tab ===== -->
-  <view wx:if="{{activeTab === 1}}">
-
-    <!-- 骨架屏 -->
+  <!-- ===== 出库 ===== -->
+  <view wx:if="{{activeTab === 1}}" class="content">
     <view wx:if="{{outLoading}}" class="skeleton-list">
       <view class="skeleton-item" wx:for="{{6}}" wx:key="*this">
+        <view class="sk-left"></view>
         <view class="sk-body">
           <view class="sk-line sk-lg"></view>
           <view class="sk-line sk-sm"></view>
         </view>
-        <view class="sk-right-col">
-          <view class="sk-line sk-md"></view>
-        </view>
       </view>
     </view>
 
-    <!-- 空状态 -->
     <view wx:elif="{{!outList.length}}" class="empty-state">
-      <text class="empty-icon">📤</text>
+      <view class="empty-icon-wrap"><text class="empty-icon">📤</text></view>
       <text class="empty-text">暂无出库记录</text>
+      <text class="empty-hint">点击右下角 + 添加出库</text>
     </view>
 
-    <!-- 列表 -->
     <view wx:else class="list">
       <view class="list-item" wx:for="{{outList}}" wx:key="id">
-        <view class="item-left">
-          <view class="type-dot out"></view>
+        <view class="item-icon-wrap out-tint">
+          <text class="item-icon-emoji">📤</text>
         </view>
         <view class="item-main">
           <view class="item-top">
@@ -110,9 +95,7 @@
             <text class="item-qty out">-{{item._qty}}</text>
           </view>
           <view class="item-bottom">
-            <view class="type-badge {{item._typeClass}}">
-              <text>{{item._type}}</text>
-            </view>
+            <view class="type-badge {{item._typeClass}}">{{item._type}}</view>
             <text wx:if="{{item._amount != null}}" class="item-amount">¥{{item._amount}}</text>
             <text class="item-time">{{item._time}}</text>
           </view>
@@ -120,14 +103,18 @@
       </view>
 
       <view class="load-more" wx:if="{{outLoadingMore}}">
-        <text class="load-more-text">加载中...</text>
+        <view class="dot-loader"><view class="dot"></view><view class="dot"></view><view class="dot"></view></view>
       </view>
       <view class="load-more" wx:elif="{{!outHasMore && outList.length}}">
         <text class="load-more-text">— 已加载全部 {{outTotal}} 条 —</text>
       </view>
     </view>
-
   </view>
 
-  <view style="height: calc(100rpx + env(safe-area-inset-bottom));"></view>
+  <!-- 浮动新增按钮 -->
+  <view class="fab" bindtap="goToAdd">
+    <text class="fab-icon">＋</text>
+  </view>
+
+  <view style="height: calc(120rpx + env(safe-area-inset-bottom));"></view>
 </view>

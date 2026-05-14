@@ -1,4 +1,7 @@
 {
   "usingComponents": {},
-  "navigationBarTitleText": "设置"
+  "navigationBarTitleText": "设置",
+  "navigationBarBackgroundColor": "#0EA5E9",
+  "navigationBarTextStyle": "white",
+  "backgroundColor": "#0EA5E9"
 }
