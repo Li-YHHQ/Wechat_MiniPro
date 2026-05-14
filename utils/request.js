@@ -23,10 +23,19 @@ const request = (options) => {
   return new Promise((resolve, reject) => {
     const token = wx.getStorageSync('token')
 
+    // wx.request 不会自动剔除值为 undefined/null 的字段, 会序列化成字符串 "undefined" / "null"
+    // 这里统一过滤掉, 否则会被后端误当成查询关键词
+    const rawData = options.data || {}
+    const data = {}
+    Object.keys(rawData).forEach(k => {
+      const v = rawData[k]
+      if (v !== undefined && v !== null) data[k] = v
+    })
+
     wx.request({
       url: BASE_URL + options.url,
       method: options.method || 'GET',
-      data: options.data || {},
+      data,
       header: {
         'Content-Type': 'application/json',
         ...(token ? { Authorization: `Bearer ${token}` } : {})

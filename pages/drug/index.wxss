@@ -218,50 +218,6 @@ page {
   color: #94A3B8;
 }
 
-/* 临时诊断面板 */
-.diag-panel {
-  margin: 32rpx 32rpx 0;
-  padding: 24rpx 28rpx;
-  background: #FFFFFF;
-  border: 1rpx dashed #CBD5E1;
-  border-radius: 16rpx;
-  width: calc(100% - 64rpx);
-  box-sizing: border-box;
-  text-align: left;
-}
-
-.diag-title {
-  display: block;
-  font-size: 22rpx;
-  font-weight: 700;
-  color: #475569;
-  margin-bottom: 12rpx;
-  letter-spacing: 0.5rpx;
-}
-
-.diag-row {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  font-size: 22rpx;
-  padding: 6rpx 0;
-}
-
-.diag-k {
-  color: #64748B;
-}
-
-.diag-v {
-  color: #0F172A;
-  font-family: ui-monospace, Menlo, Consolas, monospace;
-  word-break: break-all;
-  max-width: 60%;
-  text-align: right;
-}
-
-.diag-ok  { color: #059669; }
-.diag-err { color: #DC2626; }
-
 /* ========== 列表 ========== */
 .list {
   padding: 0 24rpx;

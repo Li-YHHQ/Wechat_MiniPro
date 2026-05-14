@@ -49,18 +49,6 @@
     </view>
     <text class="empty-text">{{searchKeyword ? '未找到相关药品' : '暂无药品数据'}}</text>
     <text wx:if="{{!searchKeyword}}" class="empty-hint">点击右下角 + 添加第一款药品</text>
-
-    <!-- 临时诊断面板 -->
-    <view wx:if="{{debug}}" class="diag-panel">
-      <text class="diag-title">诊断信息</text>
-      <view class="diag-row"><text class="diag-k">请求结果</text><text class="diag-v {{debug.ok ? 'diag-ok' : 'diag-err'}}">{{debug.ok ? '成功' : '失败'}}</text></view>
-      <view class="diag-row"><text class="diag-k">本地 token</text><text class="diag-v {{debug.hasToken ? 'diag-ok' : 'diag-err'}}">{{debug.hasToken ? '存在' : '不存在'}}</text></view>
-      <view wx:if="{{debug.ok}}" class="diag-row"><text class="diag-k">total</text><text class="diag-v">{{debug.total}}</text></view>
-      <view wx:if="{{debug.ok}}" class="diag-row"><text class="diag-k">list 长度</text><text class="diag-v">{{debug.listLen}}</text></view>
-      <view wx:if="{{!debug.ok}}" class="diag-row"><text class="diag-k">HTTP</text><text class="diag-v">{{debug.statusCode || '—'}}</text></view>
-      <view wx:if="{{!debug.ok}}" class="diag-row"><text class="diag-k">错误信息</text><text class="diag-v diag-err">{{debug.errMsg}}</text></view>
-      <view class="diag-row"><text class="diag-k">耗时</text><text class="diag-v">{{debug.elapsedMs}}ms</text></view>
-    </view>
   </view>
 
   <!-- 列表 -->
