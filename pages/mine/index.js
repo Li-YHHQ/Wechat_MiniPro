@@ -50,6 +50,7 @@ Page({
         if (res.confirm) {
           wx.removeStorageSync('token')
           wx.removeStorageSync('userInfo')
+          wx.reLaunch({ url: '/pages/login/index' })
         }
       }
     })

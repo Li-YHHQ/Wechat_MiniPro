@@ -21,8 +21,6 @@ Page({
   },
 
   async onLogin() {
-    console.log('login clicked')
-    console.log('username:', this.data.username, 'password:', this.data.password)
     const { username, password } = this.data
     if (!username || !password) {
       wx.showToast({ title: '请输入用户名和密码', icon: 'none' })

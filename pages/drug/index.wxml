@@ -50,7 +50,7 @@
         <view class="item-top">
           <text class="item-name">{{item.drug_name}}</text>
           <view class="status-badge {{item.statusOk ? 'ok' : 'warn'}}">
-            <text>{{item.statusOk ? '库存充足' : '库存不足'}}</text>
+            <text>{{item.statusLabel}}</text>
           </view>
         </view>
         <view class="item-bottom">
