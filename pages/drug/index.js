@@ -3,6 +3,20 @@ const request = require('../../utils/request')
 
 const PAGE_SIZE = 20
 
+const TINTS = ['t-cyan', 't-blue', 't-amber', 't-rose', 't-violet', 't-emerald']
+
+function tintFor(item) {
+  const key = String(item.id || item.drugCode || item.drugName || '')
+  let hash = 0
+  for (let i = 0; i < key.length; i++) hash = (hash * 31 + key.charCodeAt(i)) >>> 0
+  return TINTS[hash % TINTS.length]
+}
+
+function fmtMoney(v) {
+  if (v == null || v === '') return '--'
+  return Number(v).toFixed(2)
+}
+
 Page({
   data: {
     list: [],
@@ -12,6 +26,7 @@ Page({
     loading: false,
     loadingMore: false,
     searchKeyword: '',
+    searchFocused: false,
   },
 
   _searchTimer: null,
@@ -47,6 +62,9 @@ Page({
     }, 400)
   },
 
+  onSearchFocus() { this.setData({ searchFocused: true }) },
+  onSearchBlur()  { this.setData({ searchFocused: false }) },
+
   onSearchClear() {
     this.setData({ searchKeyword: '' })
     this.loadList(true)
@@ -69,11 +87,17 @@ Page({
       })
       const items = (res.list || []).map(item => ({
         ...item,
-        drug_name:      item.drugName,
-        specifications: item.spec,
-        statusOk:       item.status === 1,
-        statusLabel:    item.status === 1 ? '在售' : '停售',
-        _stock:         item.stockMin != null ? String(item.stockMin) : '--',
+        _name:        item.drugName,
+        _spec:        item.spec || '',
+        _manuf:       item.manufacturer || '',
+        _category:    item.category || '',
+        _retail:      fmtMoney(item.retailPrice),
+        _cost:        fmtMoney(item.costPrice),
+        _stockMin:    item.stockMin != null ? String(item.stockMin) : '--',
+        _initial:     (item.drugName || '?').slice(0, 1),
+        _tint:        tintFor(item),
+        _statusOk:    item.status === 1,
+        _statusLabel: item.status === 1 ? '在售' : '停售',
       }))
       const total = res.total || 0
 
