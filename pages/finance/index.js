@@ -58,21 +58,22 @@ Page({
         request({ url: '/finance/summary', data: { startDate, endDate } }),
         request({ url: '/finance/daily',   data: { startDate, endDate } }),
       ])
+      const fmt = v => Number(v || 0).toFixed(2)
       const s = sumRes.data || sumRes
       const summary = {
-        totalSales:  s.salesAmount  ?? 0,
-        totalCost:   s.costAmount   ?? 0,
-        grossProfit: s.profitAmount ?? 0,
-        grossMargin: (s.salesAmount > 0) ? (s.profitAmount / s.salesAmount * 100) : 0,
+        totalSales:  fmt(s.salesAmount),
+        totalCost:   fmt(s.costAmount),
+        grossProfit: fmt(s.profitAmount),
+        grossMargin: (s.salesAmount > 0) ? (s.profitAmount / s.salesAmount * 100).toFixed(1) : '0.0',
       }
       const raw = dailyRes.data || dailyRes
       const list = Array.isArray(raw) ? raw : raw.list || raw.data || []
       const details = list.map(item => ({
         ...item,
         _date:   item.statDate    || '-',
-        _sales:  item.salesAmount  ?? 0,
-        _cost:   item.costAmount   ?? 0,
-        _profit: item.profitAmount ?? 0,
+        _sales:  fmt(item.salesAmount),
+        _cost:   fmt(item.costAmount),
+        _profit: fmt(item.profitAmount),
       }))
       this.setData({ summary, details })
     } catch (e) {

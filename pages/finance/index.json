@@ -1,7 +1,9 @@
 {
   "usingComponents": {},
   "navigationBarTitleText": "财务统计",
+  "navigationBarBackgroundColor": "#0EA5E9",
+  "navigationBarTextStyle": "white",
   "enablePullDownRefresh": true,
   "backgroundTextStyle": "light",
-  "backgroundColor": "#F0F9FF"
+  "backgroundColor": "#0EA5E9"
 }
