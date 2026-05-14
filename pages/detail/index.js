@@ -15,12 +15,24 @@ Page({
   },
 
   _calcStatus(drug) {
-    const stock     = drug.current_stock ?? drug.stock_quantity ?? 0
-    const threshold = drug.low_stock_threshold ?? 0
+    const isOk = drug.status === 1 || drug.status === 'NORMAL' || drug.status === 'normal'
     return {
-      stockStatus:  stock > threshold ? 'ok'   : 'warn',
-      stockLabel:   stock > threshold ? '库存充足' : '库存不足',
-      stockDisplay: drug.current_stock ?? drug.stock_quantity ?? '--',
+      stockStatus:  isOk ? 'ok'   : 'warn',
+      stockLabel:   isOk ? '在售' : '停售',
+      stockDisplay: '--',
+    }
+  },
+
+  _normalizeDrug(raw) {
+    return {
+      ...raw,
+      drug_name:           raw.drugName,
+      drug_code:           raw.drugCode,
+      generic_name:        raw.commonName,
+      specifications:      raw.spec,
+      cost_price:          raw.costPrice,
+      retail_price:        raw.retailPrice,
+      low_stock_threshold: raw.stockMin,
     }
   },
 
@@ -34,7 +46,7 @@ Page({
     this.setData({ loading: true })
     try {
       const res = await request({ url: `/drugs/${id}` })
-      const drug = res.data || res
+      const drug = this._normalizeDrug(res)
       this.setData({ drug, loading: false, ...this._calcStatus(drug) })
       wx.setNavigationBarTitle({ title: drug.drug_name || '药品详情' })
     } catch (e) {
@@ -82,13 +94,19 @@ Page({
     this.setData({ saving: true })
     try {
       const payload = {
-        ...form,
-        cost_price:          form.cost_price          !== '' ? Number(form.cost_price)          : undefined,
-        retail_price:        form.retail_price        !== '' ? Number(form.retail_price)        : undefined,
-        low_stock_threshold: form.low_stock_threshold !== '' ? Number(form.low_stock_threshold) : undefined
+        drugCode:    form.drug_code    || undefined,
+        drugName:    form.drug_name    || undefined,
+        commonName:  form.generic_name || undefined,
+        spec:        form.specifications || undefined,
+        unit:        form.unit         || undefined,
+        category:    form.category     || undefined,
+        manufacturer: form.manufacturer || undefined,
+        costPrice:   form.cost_price          !== '' ? Number(form.cost_price)          : undefined,
+        retailPrice: form.retail_price        !== '' ? Number(form.retail_price)        : undefined,
+        stockMin:    form.low_stock_threshold !== '' ? Number(form.low_stock_threshold) : undefined,
       }
       const res = await request({ url: `/drugs/${drugId}`, method: 'PUT', data: payload })
-      const updated = res.data || res
+      const updated = this._normalizeDrug(res)
       this.setData({ drug: updated, editing: false, form: {}, ...this._calcStatus(updated) })
       wx.showToast({ title: '保存成功', icon: 'success' })
       wx.setNavigationBarTitle({ title: updated.drug_name || '药品详情' })
