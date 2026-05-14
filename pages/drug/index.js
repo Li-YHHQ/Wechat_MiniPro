@@ -67,13 +67,14 @@ Page({
         url: '/drugs',
         data: { page: nextPage, size: PAGE_SIZE, keyword: searchKeyword || undefined }
       })
-      const raw = res.data || res
-      const items = (Array.isArray(raw) ? raw : raw.list || raw.data || []).map(item => ({
+      const items = (res.list || []).map(item => ({
         ...item,
-        statusOk: (item.current_stock ?? item.stock_quantity ?? 0) > (item.low_stock_threshold ?? 0),
-        _stock:   item.current_stock ?? item.stock_quantity ?? '--',
+        drug_name:     item.drugName,
+        specifications: item.spec,
+        statusOk:      item.status === 1,
+        _stock:        item.stockMin != null ? String(item.stockMin) : '--',
       }))
-      const total = raw.total ?? items.length
+      const total = res.total || 0
 
       this.setData({
         list: reset ? items : [...this.data.list, ...items],

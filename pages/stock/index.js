@@ -68,15 +68,14 @@ Page({
     const page = reset ? 1 : this.data.inPage
     try {
       const res = await request({ url: '/stock/in', data: { page, size: PAGE_SIZE } })
-      const raw = res.data || res
-      const items = (Array.isArray(raw) ? raw : raw.list || raw.data || []).map(item => ({
+      const items = (res.list || []).map(item => ({
         ...item,
-        _time: fmtDate(item.created_at || item.in_time || item.inbound_time),
-        _qty: item.quantity ?? item.in_quantity ?? '-',
-        _batch: item.batch_number || item.batch_no || '-',
-        _name: item.drug_name || (item.drug && item.drug.drug_name) || '-',
+        _time:  fmtDate(item.createTime),
+        _qty:   item.quantity ?? '-',
+        _batch: item.batchNo || '-',
+        _name:  item.drugName || '-',
       }))
-      const total = raw.total ?? items.length
+      const total = res.total || 0
       this.setData({
         inList: reset ? items : [...this.data.inList, ...items],
         inPage: page + 1,
@@ -99,25 +98,21 @@ Page({
     const page = reset ? 1 : this.data.outPage
     try {
       const res = await request({ url: '/stock/out', data: { page, size: PAGE_SIZE } })
-      const raw = res.data || res
-      const OUT_TYPE_MAP = { sale: '销售', loss: '损耗', return: '退货', sales: '销售' }
-      const items = (Array.isArray(raw) ? raw : raw.list || raw.data || []).map(item => {
-        const rawType = item.out_type || item.type || ''
-        const typeLabel = OUT_TYPE_MAP[rawType] || rawType || '-'
-        const typeClass = rawType === 'sale' || rawType === 'sales' ? 'sale'
-          : rawType === 'loss' ? 'loss'
-          : rawType === 'return' ? 'ret' : 'sale'
+      const OUT_TYPE_MAP  = { 1: '销售', 2: '损耗', 3: '退货' }
+      const OUT_CLASS_MAP = { 1: 'sale', 2: 'loss', 3: 'ret' }
+      const items = (res.list || []).map(item => {
+        const t = item.outType
         return {
           ...item,
-          _time: fmtDate(item.created_at || item.out_time),
-          _qty: item.quantity ?? item.out_quantity ?? '-',
-          _type: typeLabel,
-          _typeClass: typeClass,
-          _amount: item.amount ?? item.total_amount,
-          _name: item.drug_name || (item.drug && item.drug.drug_name) || '-',
+          _time:      fmtDate(item.createTime),
+          _qty:       item.quantity ?? '-',
+          _type:      OUT_TYPE_MAP[t]  || String(t || '-'),
+          _typeClass: OUT_CLASS_MAP[t] || 'sale',
+          _amount:    item.totalAmount,
+          _name:      item.drugName || '-',
         }
       })
-      const total = raw.total ?? items.length
+      const total = res.total || 0
       this.setData({
         outList: reset ? items : [...this.data.outList, ...items],
         outPage: page + 1,
