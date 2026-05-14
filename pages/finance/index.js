@@ -76,7 +76,7 @@ Page({
       }))
       this.setData({ summary, details })
     } catch (e) {
-      wx.showToast({ title: '数据加载失败', icon: 'none' })
+      wx.showToast({ title: e.message || '数据加载失败', icon: 'none' })
     } finally {
       this.setData({ loading: false })
     }

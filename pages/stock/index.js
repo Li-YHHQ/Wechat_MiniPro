@@ -67,7 +67,7 @@ Page({
     }
     const page = reset ? 1 : this.data.inPage
     try {
-      const res = await request({ url: '/stock-in', data: { page, size: PAGE_SIZE } })
+      const res = await request({ url: '/stock/in', data: { page, size: PAGE_SIZE } })
       const items = (res.list || []).map(item => ({
         ...item,
         _time:  fmtDate(item.createTime),
@@ -83,7 +83,7 @@ Page({
         inHasMore: items.length === PAGE_SIZE,
       })
     } catch (e) {
-      wx.showToast({ title: '加载失败', icon: 'none' })
+      wx.showToast({ title: e.message || '加载失败', icon: 'none' })
     } finally {
       this.setData({ inLoading: false, inLoadingMore: false })
     }
@@ -97,7 +97,7 @@ Page({
     }
     const page = reset ? 1 : this.data.outPage
     try {
-      const res = await request({ url: '/stock-out', data: { page, size: PAGE_SIZE } })
+      const res = await request({ url: '/stock/out', data: { page, size: PAGE_SIZE } })
       const OUT_TYPE_MAP  = { 1: '销售', 2: '损耗', 3: '退货' }
       const OUT_CLASS_MAP = { 1: 'sale', 2: 'loss', 3: 'ret' }
       const items = (res.list || []).map(item => {
@@ -120,7 +120,7 @@ Page({
         outHasMore: items.length === PAGE_SIZE,
       })
     } catch (e) {
-      wx.showToast({ title: '加载失败', icon: 'none' })
+      wx.showToast({ title: e.message || '加载失败', icon: 'none' })
     } finally {
       this.setData({ outLoading: false, outLoadingMore: false })
     }

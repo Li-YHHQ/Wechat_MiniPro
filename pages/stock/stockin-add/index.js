@@ -36,7 +36,7 @@ Page({
   async searchDrug(keyword) {
     this.setData({ drugSearching: true })
     try {
-      const res = await request({ url: '/drugs', data: { drug_name: keyword, size: 8 } })
+      const res = await request({ url: '/drugs', data: { keyword, size: 8 } })
       const raw = Array.isArray(res) ? res : (res.list || [])
       const list = raw.map(item => ({
         ...item,
@@ -107,7 +107,7 @@ Page({
         expireDate:     form.expireDate || undefined,
         supplier:       form.supplier || undefined,
       }
-      await request({ url: '/stock-in', method: 'POST', data: payload })
+      await request({ url: '/stock/in', method: 'POST', data: payload })
       wx.showToast({ title: '入库成功', icon: 'success' })
       setTimeout(() => {
         const pages = getCurrentPages()
