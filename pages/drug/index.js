@@ -27,6 +27,7 @@ Page({
     loadingMore: false,
     searchKeyword: '',
     searchFocused: false,
+    debug: null,
   },
 
   _searchTimer: null,
@@ -80,11 +81,16 @@ Page({
     const { page, searchKeyword } = this.data
     const nextPage = reset ? 1 : page
 
+    const token = wx.getStorageSync('token')
+    const startedAt = Date.now()
+    console.log('[drug] loadList start', { page: nextPage, keyword: searchKeyword, hasToken: !!token })
+
     try {
       const res = await request({
         url: '/drugs',
         data: { page: nextPage, size: PAGE_SIZE, keyword: searchKeyword || undefined }
       })
+      console.log('[drug] response', { keys: Object.keys(res || {}), total: res && res.total, listLen: res && res.list && res.list.length, sample: res && res.list && res.list[0] })
       const items = (res.list || []).map(item => ({
         ...item,
         _name:        item.drugName,
@@ -105,10 +111,27 @@ Page({
         list: reset ? items : [...this.data.list, ...items],
         page: nextPage + 1,
         total,
-        hasMore: items.length === PAGE_SIZE
+        hasMore: items.length === PAGE_SIZE,
+        debug: {
+          ok: true,
+          hasToken: !!token,
+          total,
+          listLen: items.length,
+          elapsedMs: Date.now() - startedAt,
+        },
       })
     } catch (e) {
+      console.error('[drug] loadList error', e)
       wx.showToast({ title: e.message || '加载失败', icon: 'none' })
+      this.setData({
+        debug: {
+          ok: false,
+          hasToken: !!token,
+          errMsg: e && (e.message || String(e)),
+          statusCode: e && e.statusCode,
+          elapsedMs: Date.now() - startedAt,
+        },
+      })
     } finally {
       this.setData({ loading: false, loadingMore: false })
     }
