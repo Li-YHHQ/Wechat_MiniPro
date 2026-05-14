@@ -65,7 +65,7 @@ Page({
     try {
       const res = await request({
         url: '/drugs',
-        data: { page: nextPage, size: PAGE_SIZE, drug_name: searchKeyword || undefined }
+        data: { page: nextPage, size: PAGE_SIZE, keyword: searchKeyword || undefined }
       })
       const items = (res.list || []).map(item => ({
         ...item,
@@ -84,7 +84,7 @@ Page({
         hasMore: items.length === PAGE_SIZE
       })
     } catch (e) {
-      wx.showToast({ title: '加载失败', icon: 'none' })
+      wx.showToast({ title: e.message || '加载失败', icon: 'none' })
     } finally {
       this.setData({ loading: false, loadingMore: false })
     }

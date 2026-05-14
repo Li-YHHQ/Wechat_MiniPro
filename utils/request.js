@@ -1,6 +1,24 @@
 // utils/request.js
 const BASE_URL = 'https://medistock.shop/api'
 
+let _redirectingToLogin = false
+function _redirectToLogin() {
+  if (_redirectingToLogin) return
+  _redirectingToLogin = true
+  wx.removeStorageSync('token')
+  wx.removeStorageSync('userInfo')
+  wx.reLaunch({
+    url: '/pages/login/index',
+    complete: () => { _redirectingToLogin = false }
+  })
+}
+
+function _isAuthError(statusCode, message) {
+  if (statusCode === 401 || statusCode === 403) return true
+  if (!message) return false
+  return /未登录|登录失效|未授权|token|登录过期/i.test(message)
+}
+
 const request = (options) => {
   return new Promise((resolve, reject) => {
     const token = wx.getStorageSync('token')
@@ -14,25 +32,29 @@ const request = (options) => {
         ...(token ? { Authorization: `Bearer ${token}` } : {})
       },
       success(res) {
-        if (res.statusCode === 401) {
-          const err = new Error('未授权，请确认登录状态')
-          err.statusCode = 401
-          reject(err)
-          return
-        }
+        const body = res.data || {}
+        const message = body.message || body.msg || body.error || ''
+
+        // 1) HTTP 层错误
         if (res.statusCode >= 400) {
-          const body = res.data || {}
-          const err = new Error(body.message || body.msg || body.error || '请求失败，请重试')
+          if (_isAuthError(res.statusCode, message)) _redirectToLogin()
+          const err = new Error(message || `请求失败 (${res.statusCode})`)
           err.statusCode = res.statusCode
           reject(err)
           return
         }
-        const body = res.data || {}
-        if (body.success === false) {
-          reject(new Error(body.message || '请求失败'))
+
+        // 2) 业务层 success:false（后端常用 200 + success:false 风格）
+        if (body && body.success === false) {
+          if (_isAuthError(200, message)) _redirectToLogin()
+          const err = new Error(message || '请求失败')
+          err.statusCode = res.statusCode
+          err.bizFail = true
+          reject(err)
           return
         }
-        // 返回真正的数据层，兼容无 data 包裹的响应
+
+        // 3) 成功，返回真正的数据层
         resolve(body.data !== undefined ? body.data : body)
       },
       fail(err) {

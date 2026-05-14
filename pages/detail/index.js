@@ -51,7 +51,7 @@ Page({
       wx.setNavigationBarTitle({ title: drug.drug_name || '药品详情' })
     } catch (e) {
       this.setData({ loading: false })
-      wx.showToast({ title: '加载失败', icon: 'none' })
+      wx.showToast({ title: e.message || '加载失败', icon: 'none' })
     }
   },
 
