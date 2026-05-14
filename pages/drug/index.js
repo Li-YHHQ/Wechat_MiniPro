@@ -65,14 +65,15 @@ Page({
     try {
       const res = await request({
         url: '/drugs',
-        data: { page: nextPage, size: PAGE_SIZE, keyword: searchKeyword || undefined }
+        data: { page: nextPage, size: PAGE_SIZE, drug_name: searchKeyword || undefined }
       })
       const items = (res.list || []).map(item => ({
         ...item,
-        drug_name:     item.drugName,
+        drug_name:      item.drugName,
         specifications: item.spec,
-        statusOk:      item.status === 1,
-        _stock:        item.stockMin != null ? String(item.stockMin) : '--',
+        statusOk:       item.status === 1,
+        statusLabel:    item.status === 1 ? '在售' : '停售',
+        _stock:         item.stockMin != null ? String(item.stockMin) : '--',
       }))
       const total = res.total || 0
 

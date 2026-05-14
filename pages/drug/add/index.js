@@ -36,10 +36,16 @@ Page({
     this.setData({ submitting: true })
     try {
       const payload = {
-        ...form,
-        cost_price:          form.cost_price          !== '' ? Number(form.cost_price)          : undefined,
-        retail_price:        form.retail_price        !== '' ? Number(form.retail_price)        : undefined,
-        low_stock_threshold: form.low_stock_threshold !== '' ? Number(form.low_stock_threshold) : undefined
+        drugCode:     form.drug_code     || undefined,
+        drugName:     form.drug_name,
+        commonName:   form.generic_name  || undefined,
+        spec:         form.specifications || undefined,
+        unit:         form.unit          || undefined,
+        category:     form.category      || undefined,
+        manufacturer: form.manufacturer  || undefined,
+        costPrice:    form.cost_price          !== '' ? Number(form.cost_price)          : undefined,
+        retailPrice:  form.retail_price        !== '' ? Number(form.retail_price)        : undefined,
+        stockMin:     form.low_stock_threshold !== '' ? Number(form.low_stock_threshold) : undefined,
       }
       await request({ url: '/drugs', method: 'POST', data: payload })
       wx.showToast({ title: '添加成功', icon: 'success' })
