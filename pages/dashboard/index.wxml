@@ -1,53 +1,118 @@
 <!-- pages/dashboard/index.wxml -->
 <view class="page">
 
-  <!-- 头部 -->
-  <view class="header">
-    <view class="header-left">
-      <text class="header-title">数据看板</text>
-      <text class="header-sub">今日概览</text>
-    </view>
-    <text class="logout-btn" bindtap="onLogout">退出</text>
-  </view>
+  <!-- 渐变 Hero 背景 -->
+  <view class="hero">
+    <view class="blob blob-1"></view>
+    <view class="blob blob-2"></view>
+    <view class="hero-content">
+      <view class="hero-row">
+        <view>
+          <text class="hero-greet">{{greeting}}，{{userName}} 👋</text>
+          <text class="hero-date">{{today}}</text>
+        </view>
+      </view>
 
-  <!-- 加载骨架 -->
-  <view wx:if="{{loading}}" class="skeleton-grid">
-    <view class="skeleton-card" wx:for="{{4}}" wx:key="*this"></view>
+      <!-- 今日 / 本月 玻璃质感卡片 -->
+      <view class="today-card glass">
+        <view class="today-tag">
+          <text>TODAY</text>
+        </view>
+        <view class="today-grid">
+          <view class="today-cell">
+            <text class="today-label">今日销售</text>
+            <text class="today-value">¥<text class="today-num">{{todaySales}}</text></text>
+          </view>
+          <view class="today-divider"></view>
+          <view class="today-cell">
+            <text class="today-label">今日利润</text>
+            <text class="today-value">¥<text class="today-num">{{todayProfit}}</text></text>
+          </view>
+        </view>
+      </view>
+    </view>
   </view>
 
   <!-- 统计卡片 -->
+  <view wx:if="{{loading}}" class="stats-grid">
+    <view class="stat-card skeleton-card" wx:for="{{4}}" wx:key="*this"></view>
+  </view>
   <view wx:else class="stats-grid">
-    <view class="stat-card" wx:for="{{stats}}" wx:key="label">
-      <view class="stat-icon-wrap" style="background:{{item.color}}20;">
+    <view class="stat-card" wx:for="{{stats}}" wx:key="key">
+      <view class="stat-icon-wrap {{item.tint}}">
         <text class="stat-icon">{{item.icon}}</text>
       </view>
       <view class="stat-info">
-        <text class="stat-value">{{item.value}}<text class="stat-unit"> {{item.unit}}</text></text>
+        <text class="stat-value">{{item.value}}</text>
         <text class="stat-label">{{item.label}}</text>
       </view>
     </view>
   </view>
 
+  <!-- 本月概况 -->
+  <view class="section-row">
+    <text class="section-title">本月概况</text>
+    <text class="section-link" bindtap="goToFinance">查看详情 ›</text>
+  </view>
+  <view class="month-card">
+    <view class="month-cell">
+      <view class="month-icon-wrap month-sales">
+        <text>💰</text>
+      </view>
+      <view class="month-info">
+        <text class="month-label">本月销售额</text>
+        <text class="month-value">¥{{monthSales}}</text>
+      </view>
+    </view>
+    <view class="month-cell">
+      <view class="month-icon-wrap month-profit">
+        <text>📈</text>
+      </view>
+      <view class="month-info">
+        <text class="month-label">本月利润</text>
+        <text class="month-value">¥{{monthProfit}}</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 近 7 天销售趋势 -->
+  <view class="section-row">
+    <text class="section-title">近 7 天销售</text>
+  </view>
+  <view class="chart-card">
+    <view wx:if="{{!chartBars.length}}" class="chart-empty">暂无数据</view>
+    <view wx:else class="chart-wrap">
+      <view class="chart-bars">
+        <view class="chart-col" wx:for="{{chartBars}}" wx:key="date">
+          <view class="chart-bar-fill {{item.empty ? 'empty' : ''}}" style="height: {{item.heightPct}}%;"></view>
+          <text class="chart-x">{{item.date}}</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
   <!-- 快捷入口 -->
-  <view class="section-title">快捷功能</view>
+  <view class="section-row">
+    <text class="section-title">快捷功能</text>
+  </view>
   <view class="shortcut-grid">
     <view class="shortcut-item" bindtap="goToDrug">
-      <text class="shortcut-icon">💊</text>
+      <view class="shortcut-icon-wrap tint-cyan"><text>💊</text></view>
       <text class="shortcut-text">药品管理</text>
     </view>
     <view class="shortcut-item" bindtap="goToStock">
-      <text class="shortcut-icon">📦</text>
+      <view class="shortcut-icon-wrap tint-blue"><text>📦</text></view>
       <text class="shortcut-text">库存管理</text>
     </view>
     <view class="shortcut-item" bindtap="goToFinance">
-      <text class="shortcut-icon">📈</text>
+      <view class="shortcut-icon-wrap tint-amber"><text>📈</text></view>
       <text class="shortcut-text">财务统计</text>
     </view>
     <view class="shortcut-item" bindtap="goToMine">
-      <text class="shortcut-icon">⚙️</text>
+      <view class="shortcut-icon-wrap tint-rose"><text>⚙️</text></view>
       <text class="shortcut-text">系统设置</text>
     </view>
   </view>
 
-  <view style="height: calc(100rpx + env(safe-area-inset-bottom));"></view>
+  <view style="height: calc(120rpx + env(safe-area-inset-bottom));"></view>
 </view>
