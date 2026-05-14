@@ -65,7 +65,7 @@ Page({
     try {
       const res = await request({
         url: '/drugs',
-        data: { page: nextPage, size: PAGE_SIZE, drug_name: searchKeyword || undefined }
+        data: { page: nextPage, size: PAGE_SIZE, keyword: searchKeyword || undefined }
       })
       const raw = res.data || res
       const items = (Array.isArray(raw) ? raw : raw.list || raw.data || []).map(item => ({

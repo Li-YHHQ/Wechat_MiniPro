@@ -40,7 +40,7 @@ Page({
   async searchDrug(keyword) {
     this.setData({ drugSearching: true })
     try {
-      const res = await request({ url: '/drugs', data: { drug_name: keyword, size: 8 } })
+      const res = await request({ url: '/drugs', data: { keyword, size: 8 } })
       const raw = res.data || res
       const list = Array.isArray(raw) ? raw : raw.list || raw.data || []
       this.setData({ drugResults: list, showDropdown: true })
@@ -102,7 +102,7 @@ Page({
         out_type:  form.out_type,
         remark:    form.remark || undefined,
       }
-      await request({ url: '/stock-out', method: 'POST', data: payload })
+      await request({ url: '/stock/out', method: 'POST', data: payload })
       wx.showToast({ title: '出库成功', icon: 'success' })
       setTimeout(() => {
         const pages = getCurrentPages()
