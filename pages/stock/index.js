@@ -67,7 +67,7 @@ Page({
     }
     const page = reset ? 1 : this.data.inPage
     try {
-      const res = await request({ url: '/stock-in', data: { page, size: PAGE_SIZE } })
+      const res = await request({ url: '/stock/in', data: { page, size: PAGE_SIZE } })
       const raw = res.data || res
       const items = (Array.isArray(raw) ? raw : raw.list || raw.data || []).map(item => ({
         ...item,
@@ -98,7 +98,7 @@ Page({
     }
     const page = reset ? 1 : this.data.outPage
     try {
-      const res = await request({ url: '/stock-out', data: { page, size: PAGE_SIZE } })
+      const res = await request({ url: '/stock/out', data: { page, size: PAGE_SIZE } })
       const raw = res.data || res
       const OUT_TYPE_MAP = { sale: '销售', loss: '损耗', return: '退货', sales: '销售' }
       const items = (Array.isArray(raw) ? raw : raw.list || raw.data || []).map(item => {

@@ -54,24 +54,26 @@ Page({
     const { startDate, endDate } = this.data
     this.setData({ loading: true })
     try {
-      const res = await request({
-        url: '/finance/daily',
-        data: { startDate, endDate }
-      })
-      const raw = res.data || res
+      const [sumRes, dailyRes] = await Promise.all([
+        request({ url: '/finance/summary', data: { startDate, endDate } }),
+        request({ url: '/finance/daily',   data: { startDate, endDate } }),
+      ])
+      const s = sumRes.data || sumRes
+      const summary = {
+        totalSales:  s.salesAmount  ?? 0,
+        totalCost:   s.costAmount   ?? 0,
+        grossProfit: s.profitAmount ?? 0,
+        grossMargin: (s.salesAmount > 0) ? (s.profitAmount / s.salesAmount * 100) : 0,
+      }
+      const raw = dailyRes.data || dailyRes
       const list = Array.isArray(raw) ? raw : raw.list || raw.data || []
       const details = list.map(item => ({
         ...item,
-        _date:   item.statDate    || item.stat_date    || '-',
-        _sales:  item.salesAmount  ?? item.sales_amount  ?? 0,
-        _cost:   item.costAmount   ?? item.cost_amount   ?? 0,
-        _profit: item.profitAmount ?? item.profit_amount ?? 0,
+        _date:   item.statDate    || '-',
+        _sales:  item.salesAmount  ?? 0,
+        _cost:   item.costAmount   ?? 0,
+        _profit: item.profitAmount ?? 0,
       }))
-      const totalSales  = details.reduce((s, r) => s + Number(r._sales),  0)
-      const totalCost   = details.reduce((s, r) => s + Number(r._cost),   0)
-      const grossProfit = details.reduce((s, r) => s + Number(r._profit), 0)
-      const grossMargin = totalSales > 0 ? (grossProfit / totalSales * 100) : 0
-      const summary = { totalSales, totalCost, grossProfit, grossMargin }
       this.setData({ summary, details })
     } catch (e) {
       wx.showToast({ title: '数据加载失败', icon: 'none' })
